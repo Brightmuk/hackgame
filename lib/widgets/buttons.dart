@@ -1,0 +1,109 @@
+import 'package:flutter/material.dart';
+import 'package:hackgame/constants/colors.dart';
+import 'package:hackgame/constants/text_styles.dart';
+
+class Button extends StatefulWidget {
+  final Function onTap;
+  final Function onDrag;
+  final double width;
+  final double height;
+  final String text;
+
+  const Button(
+      {Key key,
+      this.onDrag,
+      this.onTap,
+      this.height = 50,
+      this.width = 100,
+      this.text})
+      : super(key: key);
+
+  @override
+  _ButtonState createState() => _ButtonState();
+}
+
+class _ButtonState extends State<Button> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Stack(
+        children: [
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              width: widget.width,
+              height: widget.height,
+              child: Center(
+                  child: Text(
+                widget.text,
+                style: AppTextStyles.normalText,
+              )),
+              color: AppColors.fadedWhite,
+              padding: EdgeInsets.all(5),
+            ),
+          ),
+          Positioned(
+              child: Container(
+            width: widget.width / 10,
+            height: 2,
+            color: AppColors.appGreen,
+          )),
+          Positioned(
+              left: 0,
+              child: Container(
+                width: 2,
+                height: widget.width / 10,
+                color: AppColors.appGreen,
+              )),
+          Positioned(
+              right: 0,
+              child: Container(
+                width: 2,
+                height: widget.width / 10,
+                color: AppColors.appGreen,
+              )),
+          Positioned(
+              right: 0,
+              bottom: 0,
+              child: Container(
+                width: widget.width / 10,
+                height: 2,
+                color: AppColors.appGreen,
+              )),
+          Positioned(
+              right: 0,
+              top: 0,
+              child: Container(
+                width: widget.width / 10,
+                height: 2,
+                color: AppColors.appGreen,
+              )),
+          Positioned(
+              right: 0,
+              bottom: 0,
+              child: Container(
+                width: 2,
+                height: widget.width / 10,
+                color: AppColors.appGreen,
+              )),
+          Positioned(
+              left: 0,
+              bottom: 0,
+              child: Container(
+                width: 2,
+                height: widget.width / 10,
+                color: AppColors.appGreen,
+              )),
+          Positioned(
+              left: 0,
+              bottom: 0,
+              child: Container(
+                width: widget.width / 10,
+                height: 2,
+                color: AppColors.appGreen,
+              )),
+        ],
+      ),
+    );
+  }
+}
