@@ -14,4 +14,5 @@ static screenWidth(context){
 static EdgeInsets windowPadding = EdgeInsets.symmetric(horizontal: 10.sp);
 static EdgeInsets topBottomPadding = EdgeInsets.symmetric(vertical: 5.sp);
 
+
 }

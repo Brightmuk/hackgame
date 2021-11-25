@@ -14,4 +14,7 @@ class AppTextStyles{
 
   static TextStyle miniText = TextStyle(color: Colors.white,fontSize: 10.sp,);
   static TextStyle macroText = TextStyle(color: Colors.white,fontSize: 11.sp);
+
+  static TextStyle largeText = TextStyle(color: Colors.white,fontSize: 16.sp,);
+  static TextStyle largeThickText = TextStyle(color: Colors.white,fontSize: 16.sp,fontWeight: FontWeight.bold);
 }

@@ -4,14 +4,14 @@ import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
 import 'package:hackgame/widgets/window.dart';
 
-class CryptoWidnow extends StatefulWidget {
-  const CryptoWidnow({Key key}) : super(key: key);
+class CryptoWindow extends StatefulWidget {
+  const CryptoWindow({Key key}) : super(key: key);
 
   @override
-  _CryptoWidnowState createState() => _CryptoWidnowState();
+  _CryptoWindowState createState() => _CryptoWindowState();
 }
 
-class _CryptoWidnowState extends State<CryptoWidnow> {
+class _CryptoWindowState extends State<CryptoWindow> {
   @override
   Widget build(BuildContext context) {
     return Window(

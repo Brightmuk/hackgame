@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/sizes.dart';
+import 'package:hackgame/ui/account_page.dart';
 import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/activity_logger_window.dart';
 import 'package:hackgame/ui/dashboard/assets_window.dart';
@@ -35,9 +36,17 @@ class _DashBoardState extends State<DashBoard> {
               height: AppSizes.screenHeight(context) * 0.05,
               child: Stack(
                 children: [
-                  Positioned(left: 0, child: AccountWindow()),
-                  Positioned(right: 125, child: MoneyWindw()),
-                  Positioned(right: 0, child: CryptoWidnow())
+                  Positioned(
+                      left: 0,
+                      child: GestureDetector(
+                          onTap: () {
+                            showCupertinoDialog(
+                                context: context,
+                                builder: (context) => AccountPage());
+                          },
+                          child: AccountWindow())),
+                  Positioned(right: 125, child: MoneyWindow()),
+                  Positioned(right: 0, child: CryptoWindow())
                 ],
               ),
             ),
@@ -47,33 +56,35 @@ class _DashBoardState extends State<DashBoard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                  onTap: (){
-                  showCupertinoDialog(
-                    context: context, 
-                    builder: (context)=>Container(
-                      child: Scaffold(
-                        backgroundColor: Colors.black.withOpacity(0.8),
-                        body: Center(child: ProcessWindow(expanded: true,))
-                        ),
-                      )
-                     );
-                    },
-                    child: ProcessWindow()
-                    ),
+                      onTap: () {
+                        showCupertinoDialog(
+                            context: context,
+                            builder: (context) => Container(
+                                  child: Scaffold(
+                                      backgroundColor:
+                                          Colors.black.withOpacity(0.8),
+                                      body: Center(
+                                          child: ProcessWindow(
+                                        expanded: true,
+                                      ))),
+                                ));
+                      },
+                      child: ProcessWindow()),
                   GestureDetector(
-                    onTap: (){
-                  showCupertinoDialog(
-                    context: context, 
-                    builder: (context)=>Container(
-                      child: Scaffold(
-                        backgroundColor: Colors.black.withOpacity(0.8),
-                        body: Center(child: ActivityLoggerWindow(expanded: true,))
-                        ),
-                      )
-                     );
-                    },
-                    child: ActivityLoggerWindow()
-                  ),
+                      onTap: () {
+                        showCupertinoDialog(
+                            context: context,
+                            builder: (context) => Container(
+                                  child: Scaffold(
+                                      backgroundColor:
+                                          Colors.black.withOpacity(0.8),
+                                      body: Center(
+                                          child: ActivityLoggerWindow(
+                                        expanded: true,
+                                      ))),
+                                ));
+                      },
+                      child: ActivityLoggerWindow()),
                 ],
               ),
             ),
@@ -107,6 +118,4 @@ class _DashBoardState extends State<DashBoard> {
   }
 }
 
-void expand(Widget target){
-  
-}
+void expand(Widget target) {}

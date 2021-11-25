@@ -4,14 +4,14 @@ import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
 import 'package:hackgame/widgets/window.dart';
 
-class MoneyWindw extends StatefulWidget {
-  const MoneyWindw({Key key}) : super(key: key);
+class MoneyWindow extends StatefulWidget {
+  const MoneyWindow({Key key}) : super(key: key);
 
   @override
-  _MoneyWindwState createState() => _MoneyWindwState();
+  _MoneyWindowState createState() => _MoneyWindowState();
 }
 
-class _MoneyWindwState extends State<MoneyWindw> {
+class _MoneyWindowState extends State<MoneyWindow> {
   @override
   Widget build(BuildContext context) {
     return Window(
