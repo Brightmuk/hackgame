@@ -1,16 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/sizes.dart';
-import 'package:hackgame/dashboard/account_window.dart';
-import 'package:hackgame/dashboard/activity_logger_window.dart';
-import 'package:hackgame/dashboard/assets_window.dart';
-import 'package:hackgame/dashboard/contracts_window.dart';
-import 'package:hackgame/dashboard/crypto_window.dart';
-import 'package:hackgame/dashboard/device_status_window.dart';
-import 'package:hackgame/dashboard/exploits_window.dart';
-import 'package:hackgame/dashboard/money_window.dart';
-import 'package:hackgame/dashboard/processes_window.dart';
+import 'package:hackgame/ui/dashboard/account_window.dart';
+import 'package:hackgame/ui/dashboard/activity_logger_window.dart';
+import 'package:hackgame/ui/dashboard/assets_window.dart';
+import 'package:hackgame/ui/dashboard/contracts_window.dart';
+import 'package:hackgame/ui/dashboard/crypto_window.dart';
+import 'package:hackgame/ui/dashboard/device_status_window.dart';
+import 'package:hackgame/ui/dashboard/exploits_window.dart';
+import 'package:hackgame/ui/dashboard/money_window.dart';
+import 'package:hackgame/ui/dashboard/processes_window.dart';
 
-import 'constants/sizes.dart';
+import '../constants/sizes.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key key}) : super(key: key);
@@ -45,8 +46,34 @@ class _DashBoardState extends State<DashBoard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ProcessWindow(),
-                  ActivityLoggerWindow(),
+                  GestureDetector(
+                  onTap: (){
+                  showCupertinoDialog(
+                    context: context, 
+                    builder: (context)=>Container(
+                      child: Scaffold(
+                        backgroundColor: Colors.black.withOpacity(0.8),
+                        body: Center(child: ProcessWindow(expanded: true,))
+                        ),
+                      )
+                     );
+                    },
+                    child: ProcessWindow()
+                    ),
+                  GestureDetector(
+                    onTap: (){
+                  showCupertinoDialog(
+                    context: context, 
+                    builder: (context)=>Container(
+                      child: Scaffold(
+                        backgroundColor: Colors.black.withOpacity(0.8),
+                        body: Center(child: ActivityLoggerWindow(expanded: true,))
+                        ),
+                      )
+                     );
+                    },
+                    child: ActivityLoggerWindow()
+                  ),
                 ],
               ),
             ),
@@ -78,4 +105,8 @@ class _DashBoardState extends State<DashBoard> {
           ],
         ));
   }
+}
+
+void expand(Widget target){
+  
 }

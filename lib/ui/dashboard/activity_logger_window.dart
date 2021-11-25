@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
@@ -5,7 +6,8 @@ import 'package:hackgame/constants/text_styles.dart';
 import 'package:hackgame/widgets/window.dart';
 
 class ActivityLoggerWindow extends StatefulWidget {
-  const ActivityLoggerWindow({Key key}) : super(key: key);
+  final bool expanded;
+  const ActivityLoggerWindow({Key key,this.expanded=false}) : super(key: key);
 
   @override
   _ActivityLoggerWindowState createState() => _ActivityLoggerWindowState();
@@ -15,6 +17,7 @@ class _ActivityLoggerWindowState extends State<ActivityLoggerWindow> {
   @override
   Widget build(BuildContext context) {
     return Window(
+      expanded: widget.expanded,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,8 +41,8 @@ class _ActivityLoggerWindowState extends State<ActivityLoggerWindow> {
           ),
         ],
       ),
-      height: AppSizes.screenHeight(context) * 0.3,
-      width: AppSizes.screenWidth(context) * 0.6,
+      height: widget.expanded?AppSizes.screenHeight(context) * 0.6: AppSizes.screenHeight(context) * 0.3,
+      width:widget.expanded?AppSizes.screenWidth(context) * 0.9: AppSizes.screenWidth(context) * 0.58,
     );
   }
 }

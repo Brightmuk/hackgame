@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
+import 'package:hackgame/constants/sizes.dart';
 
 class Window extends StatefulWidget {
   final Function onTap;
@@ -7,10 +8,12 @@ class Window extends StatefulWidget {
   final double width;
   final double height;
   final Widget content;
+  final bool expanded;
 
   const Window(
       {Key key,
       this.onDrag,
+      this.expanded=false,
       this.onTap,
       this.height = 50,
       this.width = 200,
@@ -63,6 +66,15 @@ class _WindowState extends State<Window> {
                 height: widget.width / 8,
                 color: AppColors.appGreen,
               )),
+              Positioned(
+                right: 0,
+                top: 0,
+                child: Visibility(
+                  visible: widget.expanded,
+                  child: IconButton(icon: Icon(Icons.close,color: AppColors.appGreen,),onPressed: (){Navigator.pop(context);},),
+                ),
+              )
+
         ],
       ),
     );

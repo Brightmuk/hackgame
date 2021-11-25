@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hackgame/dashboard.dart';
+import 'package:hackgame/ui/dashboard.dart';
 
 void main() {
   runApp(MyApp());
