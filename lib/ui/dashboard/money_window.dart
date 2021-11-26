@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
+import 'package:hackgame/ui/money_screen.dart';
 import 'package:hackgame/widgets/window.dart';
 
 class MoneyWindow extends StatefulWidget {
@@ -15,6 +17,17 @@ class _MoneyWindowState extends State<MoneyWindow> {
   @override
   Widget build(BuildContext context) {
     return Window(
+      onTap: (){
+    showCupertinoDialog(
+    context: context,
+    builder: (context) => Container(
+          child: Scaffold(
+              backgroundColor:
+                  Colors.black.withOpacity(0.8),
+              body: Center(
+                  child: MoneyScreen())),
+        ));
+      },
       content: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,

@@ -27,55 +27,58 @@ class Window extends StatefulWidget {
 class _WindowState extends State<Window> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Stack(
-        children: [
-          Container(
-            width: widget.width,
-            height: widget.height,
-            child: Center(child: widget.content),
-            color: AppColors.fadedWhite,
-            padding: EdgeInsets.all(5),
-          ),
-          Positioned(
-              child: Container(
-            width: widget.width / 8,
-            height: 2,
-            color: AppColors.appGreen,
-          )),
-          Positioned(
-              left: 0,
-              child: Container(
-                width: 2,
-                height: widget.width / 8,
-                color: AppColors.appGreen,
-              )),
-          Positioned(
-              right: 0,
-              bottom: 0,
-              child: Container(
-                width: widget.width / 8,
-                height: 2,
-                color: AppColors.appGreen,
-              )),
-          Positioned(
-              right: 0,
-              bottom: 0,
-              child: Container(
-                width: 2,
-                height: widget.width / 8,
-                color: AppColors.appGreen,
-              )),
-              Positioned(
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: Container(
+        child: Stack(
+          children: [
+            Container(
+              width: widget.width,
+              height: widget.height,
+              child: Center(child: widget.content),
+              color: AppColors.fadedWhite,
+              padding: EdgeInsets.all(5),
+            ),
+            Positioned(
+                child: Container(
+              width: widget.width / 8,
+              height: 2,
+              color: AppColors.appGreen,
+            )),
+            Positioned(
+                left: 0,
+                child: Container(
+                  width: 2,
+                  height: widget.width / 8,
+                  color: AppColors.appGreen,
+                )),
+            Positioned(
                 right: 0,
-                top: 0,
-                child: Visibility(
-                  visible: widget.expanded,
-                  child: IconButton(icon: Icon(Icons.close,color: AppColors.appGreen,),onPressed: (){Navigator.pop(context);},),
-                ),
-              )
+                bottom: 0,
+                child: Container(
+                  width: widget.width / 8,
+                  height: 2,
+                  color: AppColors.appGreen,
+                )),
+            Positioned(
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  width: 2,
+                  height: widget.width / 8,
+                  color: AppColors.appGreen,
+                )),
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Visibility(
+                    visible: widget.expanded,
+                    child: IconButton(icon: Icon(Icons.close,color: AppColors.appGreen,),onPressed: (){Navigator.pop(context);},),
+                  ),
+                )
 
-        ],
+          ],
+        ),
       ),
     );
   }

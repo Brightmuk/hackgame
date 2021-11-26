@@ -29,7 +29,7 @@ class _ButtonState extends State<Button> {
       child: Stack(
         children: [
           GestureDetector(
-            onTap: () {},
+            onTap: widget.onTap,
             child: Container(
               width: widget.width,
               height: widget.height,

@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
-import 'package:hackgame/ui/account_page.dart';
+import 'package:hackgame/ui/account_screen.dart';
 import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/activity_logger_window.dart';
 import 'package:hackgame/ui/dashboard/assets_window.dart';
@@ -42,7 +43,7 @@ class _DashBoardState extends State<DashBoard> {
                           onTap: () {
                             showCupertinoDialog(
                                 context: context,
-                                builder: (context) => AccountPage());
+                                builder: (context) => AccountScreen());
                           },
                           child: AccountWindow())),
                   Positioned(right: 125, child: MoneyWindow()),
@@ -62,7 +63,7 @@ class _DashBoardState extends State<DashBoard> {
                             builder: (context) => Container(
                                   child: Scaffold(
                                       backgroundColor:
-                                          Colors.black.withOpacity(0.8),
+                                          AppColors.barrierBlack,
                                       body: Center(
                                           child: ProcessWindow(
                                         expanded: true,
