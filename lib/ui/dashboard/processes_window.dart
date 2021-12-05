@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
@@ -20,6 +21,19 @@ class _ProcessWindowState extends State<ProcessWindow> {
   Widget build(BuildContext context) {
     return Window(
       expanded: widget.expanded,
+      onTap: (){
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => Container(
+              child: Scaffold(
+                  backgroundColor:
+                      AppColors.barrierBlack,
+                  body: Center(
+                      child: ProcessWindow(
+                    expanded: true,
+                  ))),
+            ));
+      },
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,7 +63,7 @@ class _ProcessWindowState extends State<ProcessWindow> {
                           RichText(
                               text: TextSpan(children: <TextSpan>[
                             TextSpan(
-                                text: 'Bypassing IP:',
+                                text: 'Exploiting:',
                                 style: AppTextStyles.macroText),
                             TextSpan(text: ' 127.90.43.03 ${index + 1}', style: AppTextStyles.macroText,)
                           ])),

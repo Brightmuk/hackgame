@@ -18,6 +18,19 @@ class _ActivityLoggerWindowState extends State<ActivityLoggerWindow> {
   Widget build(BuildContext context) {
     return Window(
       expanded: widget.expanded,
+      onTap: (){
+            showCupertinoDialog(
+        context: context,
+        builder: (context) => Container(
+              child: Scaffold(
+                  backgroundColor:
+                      Colors.black.withOpacity(0.8),
+                  body: Center(
+                      child: ActivityLoggerWindow(
+                    expanded: true,
+                  ))),
+            ));
+      },
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

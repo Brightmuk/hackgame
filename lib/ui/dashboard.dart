@@ -37,15 +37,7 @@ class _DashBoardState extends State<DashBoard> {
               height: AppSizes.screenHeight(context) * 0.05,
               child: Stack(
                 children: [
-                  Positioned(
-                      left: 0,
-                      child: GestureDetector(
-                          onTap: () {
-                            showCupertinoDialog(
-                                context: context,
-                                builder: (context) => AccountScreen());
-                          },
-                          child: AccountWindow())),
+                  Positioned(left: 0,child: AccountWindow()),
                   Positioned(right: 125, child: MoneyWindow()),
                   Positioned(right: 0, child: CryptoWindow())
                 ],
@@ -56,36 +48,8 @@ class _DashBoardState extends State<DashBoard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                      onTap: () {
-                        showCupertinoDialog(
-                            context: context,
-                            builder: (context) => Container(
-                                  child: Scaffold(
-                                      backgroundColor:
-                                          AppColors.barrierBlack,
-                                      body: Center(
-                                          child: ProcessWindow(
-                                        expanded: true,
-                                      ))),
-                                ));
-                      },
-                      child: ProcessWindow()),
-                  GestureDetector(
-                      onTap: () {
-                        showCupertinoDialog(
-                            context: context,
-                            builder: (context) => Container(
-                                  child: Scaffold(
-                                      backgroundColor:
-                                          Colors.black.withOpacity(0.8),
-                                      body: Center(
-                                          child: ActivityLoggerWindow(
-                                        expanded: true,
-                                      ))),
-                                ));
-                      },
-                      child: ActivityLoggerWindow()),
+                  ProcessWindow(),
+                  ActivityLoggerWindow(),
                 ],
               ),
             ),

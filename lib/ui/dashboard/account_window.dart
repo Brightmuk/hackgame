@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
+import 'package:hackgame/ui/account_screen.dart';
 import 'package:hackgame/widgets/window.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,6 +18,11 @@ class _AccountWindowState extends State<AccountWindow> {
   @override
   Widget build(BuildContext context) {
     return Window(
+      onTap: (){
+            showCupertinoDialog(
+        context: context,
+        builder: (context) => AccountScreen());
+      },
       content: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

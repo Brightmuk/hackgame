@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class Window extends StatefulWidget {
   final Function onTap;
@@ -9,11 +11,13 @@ class Window extends StatefulWidget {
   final double height;
   final Widget content;
   final bool expanded;
+  final bool expandable;
 
   const Window(
       {Key key,
       this.onDrag,
       this.expanded=false,
+      this.expandable=false,
       this.onTap,
       this.height = 50,
       this.width = 200,
@@ -25,10 +29,21 @@ class Window extends StatefulWidget {
 }
 
 class _WindowState extends State<Window> {
+  AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
+  final player = AudioCache();
+
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: (){
+                          //           showCupertinoDialog(
+                          //       context: context,
+                          //       builder: (context) => AccountScreen());
+                          // },
+                          // child: AccountWindow())
+      widget.onTap();
+      },
       child: Container(
         child: Stack(
           children: [

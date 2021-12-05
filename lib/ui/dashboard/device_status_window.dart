@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
+import 'package:hackgame/ui/device.dart';
 import 'package:hackgame/widgets/window.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -16,6 +18,11 @@ class _DeviceStatusWindowState extends State<DeviceStatusWindow> {
   @override
   Widget build(BuildContext context) {
     return Window(
+      onTap: (){
+        showCupertinoDialog(
+        context: context,
+        builder: (context) =>DeviceScreen());
+      },
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
