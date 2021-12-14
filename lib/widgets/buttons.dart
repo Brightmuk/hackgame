@@ -4,6 +4,7 @@ import 'package:hackgame/constants/text_styles.dart';
 
 class Button extends StatefulWidget {
   final Function onTap;
+  final bool miniButton;
   final Function onDrag;
   final double width;
   final double height;
@@ -13,6 +14,7 @@ class Button extends StatefulWidget {
       {Key key,
       this.onDrag,
       this.onTap,
+      this.miniButton=false,
       this.height = 50,
       this.width = 100,
       this.text})
@@ -36,7 +38,8 @@ class _ButtonState extends State<Button> {
               child: Center(
                   child: Text(
                 widget.text,
-                style: AppTextStyles.normalText,
+                style: widget.miniButton?AppTextStyles.normalText.copyWith(fontSize: 10):
+                 AppTextStyles.normalText,
               )),
               color: AppColors.fadedWhite,
               padding: EdgeInsets.all(5),

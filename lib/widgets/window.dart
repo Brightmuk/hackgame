@@ -6,6 +6,7 @@ import 'package:audioplayers/audioplayers.dart';
 
 class Window extends StatefulWidget {
   final Function onTap;
+  final Color color;
   final Function onDrag;
   final double width;
   final double height;
@@ -18,6 +19,7 @@ class Window extends StatefulWidget {
       this.onDrag,
       this.expanded=false,
       this.expandable=false,
+      this.color,
       this.onTap,
       this.height = 50,
       this.width = 200,
@@ -37,11 +39,7 @@ class _WindowState extends State<Window> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-                          //           showCupertinoDialog(
-                          //       context: context,
-                          //       builder: (context) => AccountScreen());
-                          // },
-                          // child: AccountWindow())
+
       widget.onTap();
       },
       child: Container(
@@ -51,7 +49,7 @@ class _WindowState extends State<Window> {
               width: widget.width,
               height: widget.height,
               child: Center(child: widget.content),
-              color: AppColors.fadedWhite,
+              color: widget.color??AppColors.fadedWhite,
               padding: EdgeInsets.all(5),
             ),
             Positioned(

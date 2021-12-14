@@ -1,9 +1,11 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
+import 'package:hackgame/ui/assets_screen.dart';
 import 'package:hackgame/widgets/snap_scroll.dart';
 import 'package:hackgame/widgets/window.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -24,6 +26,11 @@ class _AssetsWindowState extends State<AssetsWindow> {
   @override
   Widget build(BuildContext context) {
     return Window(
+      onTap: (){
+      showCupertinoDialog(
+        context: context,
+        builder: (context) =>AssetsScreen());
+      },
       content: Container(
         padding: AppSizes.topBottomPadding,
         child: Column(

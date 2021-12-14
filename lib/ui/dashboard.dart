@@ -71,7 +71,7 @@ class _DashBoardState extends State<DashBoard> {
                     height: AppSizes.screenHeight(context) * 0.4,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [AssetsWindow(), ContractsWindow()],
+                      children: [ ContractsWindow(),AssetsWindow()],
                     ),
                   )
                 ],

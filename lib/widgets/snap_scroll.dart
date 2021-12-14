@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackgame/constants/assets_images.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
@@ -35,6 +36,9 @@ class _SnapScrollState extends State<SnapScroll> {
                   height: AppSizes.screenHeight(context)*0.1,
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.6),
+                    image: DecorationImage(
+                      image: AssetImage(UserAssetImage.asset2)
+                    ),
                     borderRadius: BorderRadius.all(Radius.circular(4.0)),
                   ),
                 ),

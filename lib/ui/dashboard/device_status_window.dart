@@ -69,39 +69,7 @@ class _DeviceStatusWindowState extends State<DeviceStatusWindow> {
                   ],
                 ),
               ),
-              Container(
-                width: AppSizes.screenWidth(context) * 0.3,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    CircularPercentIndicator(
-                      radius: AppSizes.screenWidth(context) * 0.1,
-                      lineWidth: 3.0,
-                      percent: 0.2,
-                      center: Text(
-                        "20%",
-                        style: AppTextStyles.normalText,
-                      ),
-                      progressColor: AppColors.appGreen,
-                      backgroundColor: Colors.black,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'LV.4 Hardware',
-                          style: AppTextStyles.miniText,
-                        ),
-                        Text(
-                          'Perfect',
-                          style:
-                              AppTextStyles.themedText,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+
               Container(
                 width: AppSizes.screenWidth(context) * 0.3,
                 child: Row(
@@ -122,7 +90,7 @@ class _DeviceStatusWindowState extends State<DeviceStatusWindow> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'LV.4 Hardware',
+                          'LV.4 Software',
                           style: AppTextStyles.miniText,
                         ),
                         Text(
