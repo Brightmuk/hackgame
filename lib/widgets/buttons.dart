@@ -55,14 +55,14 @@ class _ButtonState extends State<Button> {
               left: 0,
               child: Container(
                 width: 2,
-                height: widget.width / 10,
+                height: widget.height / 3,
                 color: AppColors.appGreen,
               )),
           Positioned(
               right: 0,
               child: Container(
                 width: 2,
-                height: widget.width / 10,
+                height: widget.height / 3,
                 color: AppColors.appGreen,
               )),
           Positioned(
@@ -86,7 +86,7 @@ class _ButtonState extends State<Button> {
               bottom: 0,
               child: Container(
                 width: 2,
-                height: widget.width / 10,
+                height: widget.height / 3,
                 color: AppColors.appGreen,
               )),
           Positioned(
@@ -94,7 +94,7 @@ class _ButtonState extends State<Button> {
               bottom: 0,
               child: Container(
                 width: 2,
-                height: widget.width / 10,
+                height: widget.height / 3,
                 color: AppColors.appGreen,
               )),
           Positioned(
