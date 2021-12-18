@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
@@ -25,7 +27,23 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+        return Scaffold(
+      backgroundColor: Colors.black,
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.black,
+                image: DecorationImage(
+                    image: AssetImage('assets/images/background.jpg'),
+                    fit: BoxFit.cover)),
+          ),
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+            child: Container(
+              alignment: Alignment.center,
+              child: SafeArea(
+                child: Container(
         width: AppSizes.screenWidth(context),
         height: AppSizes.screenHeight(context),
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -79,8 +97,15 @@ class _DashBoardState extends State<DashBoard> {
             ),
             SizedBox()
           ],
-        ));
+        )),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+ 
   }
 }
 
-void expand(Widget target) {}
+

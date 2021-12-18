@@ -1,10 +1,24 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hackgame/providers/auth_provider.dart';
+import 'package:hackgame/ui/auth/login.dart';
 import 'package:hackgame/ui/dashboard.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(MyApp());
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp( MultiProvider(
+        providers: [
+          ChangeNotifierProvider<AuthProvider>.value(
+            value: AuthProvider()
+            ),
+        ],
+        child: MyApp(),
+      ),);
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +33,7 @@ class MyApp extends StatelessWidget {
           platform: TargetPlatform.iOS,
           primarySwatch: Colors.blue,
         ),
-        home: MyHomePage(),
+        home: AuthWrapper(),
       ),
       
       designSize: const Size(414, 896),
@@ -27,40 +41,27 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({
-    Key key,
-  }) : super(key: key);
 
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({ Key key }) : super(key: key);
 
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.black,
-                image: DecorationImage(
-                    image: AssetImage('assets/images/background.jpg'),
-                    fit: BoxFit.cover)),
-          ),
-          BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-            child: Container(
-              alignment: Alignment.center,
-              child: SafeArea(
-                child: DashBoard(),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context,sn){
+        if(sn.connectionState==ConnectionState.waiting){
+          return Center(child: CircularProgressIndicator());
+        }else if(sn.hasData){
+          return DashBoard();
+        }else if(sn.hasError){
+          return Center(child: Text('Something went wrong!'),);
+        }else{
+          return LoginScreen();
+        }
+      }
+      );
   }
 }
+
+

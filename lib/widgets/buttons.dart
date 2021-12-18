@@ -9,6 +9,7 @@ class Button extends StatefulWidget {
   final double width;
   final double height;
   final String text;
+  final Widget icon;
 
   const Button(
       {Key key,
@@ -17,7 +18,9 @@ class Button extends StatefulWidget {
       this.miniButton=false,
       this.height = 50,
       this.width = 100,
-      this.text})
+      this.text,
+      this.icon
+      })
       : super(key: key);
 
   @override
@@ -35,12 +38,22 @@ class _ButtonState extends State<Button> {
             child: Container(
               width: widget.width,
               height: widget.height,
-              child: Center(
+              child: widget.icon==null? Center(
                   child: Text(
                 widget.text,
                 style: widget.miniButton?AppTextStyles.normalText.copyWith(fontSize: 10):
                  AppTextStyles.normalText,
-              )),
+              )):Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                widget.icon,
+                SizedBox(width: 10,),
+                Text(
+                widget.text,
+                style: widget.miniButton?AppTextStyles.normalText.copyWith(fontSize: 10):
+                 AppTextStyles.normalText,
+              )
+              ],),
               color: AppColors.fadedWhite,
               padding: EdgeInsets.all(5),
             ),
@@ -110,3 +123,4 @@ class _ButtonState extends State<Button> {
     );
   }
 }
+

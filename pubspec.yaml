@@ -23,6 +23,11 @@ dev_dependencies:
   scrollable_positioned_list: ^0.2.3
   audioplayers: ^0.20.0
   flutter_cube: ^0.1.1
+  firebase_auth: ^3.3.4
+  provider: ^6.0.1
+  google_sign_in: ^5.0.7
+  font_awesome_flutter: ^9.2.0
+
 
 flutter:
 
