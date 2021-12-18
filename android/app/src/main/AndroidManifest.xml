@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hackgame">
+    package="com.brightdesigns.hackgame">
    <application
         android:label="hackgame"
         android:icon="@mipmap/ic_launcher">
