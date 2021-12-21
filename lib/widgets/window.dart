@@ -31,15 +31,21 @@ class Window extends StatefulWidget {
 }
 
 class _WindowState extends State<Window> {
-  AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
-  final player = AudioCache();
+  AudioCache _audioCache;
 
+  void initState() {
+    super.initState();
+    _audioCache = AudioCache(
+      prefix: 'audio/',
+      fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-
+      _audioCache.play('window-click.wav');
       widget.onTap();
       },
       child: Container(
