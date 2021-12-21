@@ -12,10 +12,12 @@ class UserService {
     String avatar,
     String username,
     String alias,
+    String ip,
   }) async {
     try {
       await userCollection.doc(userId).set({
         'avatar': avatar,
+        'ip':ip,
         'username': username,
         'joinedDate': DateTime.now(),
         'alias': alias,

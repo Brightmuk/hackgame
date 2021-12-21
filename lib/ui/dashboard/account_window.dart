@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
+import 'package:hackgame/models/appUser.dart';
 import 'package:hackgame/ui/account_screen.dart';
 import 'package:hackgame/widgets/window.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class AccountWindow extends StatefulWidget {
   const AccountWindow({Key key}) : super(key: key);
@@ -17,6 +19,8 @@ class AccountWindow extends StatefulWidget {
 class _AccountWindowState extends State<AccountWindow> {
   @override
   Widget build(BuildContext context) {
+    final AppUser user = Provider.of<AppUser>(context);
+
     return Window(
       onTap: (){
             showCupertinoDialog(
@@ -28,18 +32,18 @@ class _AccountWindowState extends State<AccountWindow> {
         children: [
           Padding(
             padding: EdgeInsets.only(left:8.0.sp),
-            child: Text('Alias',
+            child: Text(user.alias,
                 style: AppTextStyles.normalText.copyWith(fontFamily: "Hack", fontSize: 16.sp)),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                'LV.10',
+                'LV.${user.level}',
                 style: AppTextStyles.infoText,
               ),
               Text(
-                'CR.450',
+                'CR.${user.reputation}',
                 style: AppTextStyles.infoText,
               )
             ],

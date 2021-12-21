@@ -12,6 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hackgame/widgets/buttons.dart';
 import 'package:hackgame/widgets/edit_screen.dart';
 import 'package:hackgame/widgets/window.dart';
+import 'package:provider/provider.dart';
+import 'package:hackgame/models/appUser.dart';
 
 class CryptoScreen extends StatefulWidget {
   const CryptoScreen({Key key}) : super(key: key);
@@ -23,6 +25,7 @@ class CryptoScreen extends StatefulWidget {
 class _CryptoScreenState extends State<CryptoScreen> {
   @override
   Widget build(BuildContext context) {
+    final AppUser user = Provider.of<AppUser>(context);
     return Scaffold(
       backgroundColor: Colors.black,
       body: Padding(
@@ -93,7 +96,7 @@ class _CryptoScreenState extends State<CryptoScreen> {
                                           'assets/images/crypto.png',
                                            width: 20,
                                         ),
-                                        Text(' 340',
+                                        Text(user.crypto.toString(),
                                             style: AppTextStyles.normalThickText
                                                 .copyWith(fontSize: 30.sp)),
                                       ],

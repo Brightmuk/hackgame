@@ -36,7 +36,7 @@ class _WindowState extends State<Window> {
   void initState() {
     super.initState();
     _audioCache = AudioCache(
-      prefix: 'audio/',
+      prefix: 'assets/audio/',
       fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP),
     );
   }

@@ -169,6 +169,7 @@ class _NewAccountState extends State<NewAccount> {
                                  alias: aliasC.value.text,
                                  username: FirebaseAuth.instance.currentUser.displayName,
                                  avatar: avatar,
+                                 ip: ip
                                );
                             },
                             ),

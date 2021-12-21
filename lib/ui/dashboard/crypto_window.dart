@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
+import 'package:hackgame/models/appUser.dart';
 import 'package:hackgame/ui/crypto_screen.dart';
 import 'package:hackgame/widgets/window.dart';
+import 'package:provider/provider.dart';
 
 class CryptoWindow extends StatefulWidget {
   const CryptoWindow({Key key}) : super(key: key);
@@ -14,8 +16,10 @@ class CryptoWindow extends StatefulWidget {
 }
 
 class _CryptoWindowState extends State<CryptoWindow> {
+
   @override
   Widget build(BuildContext context) {
+        final AppUser user = Provider.of<AppUser>(context);
     return Window(
       onTap: (){
       showCupertinoDialog(
@@ -42,7 +46,7 @@ class _CryptoWindowState extends State<CryptoWindow> {
                  
                   width: 10,
                 ),
-                Text(' 340',
+                Text(user.crypto.toString(),
                     style: AppTextStyles.normalThickText
                         .copyWith(color: Colors.white)),
               ],

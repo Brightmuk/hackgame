@@ -7,12 +7,15 @@ import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hackgame/functions/random_ip.dart';
 import 'package:hackgame/widgets/buttons.dart';
 import 'package:hackgame/widgets/window.dart';
 
 class EditScreen extends StatefulWidget {
   final String toEdit;
-  const EditScreen({ Key key,this.toEdit }) : super(key: key);
+  final Function onSave;
+  final bool isIp;
+  const EditScreen({ Key key,this.toEdit ,this.onSave,this.isIp=false}) : super(key: key);
 
   @override
   _EditScreenState createState() => _EditScreenState();
@@ -20,6 +23,14 @@ class EditScreen extends StatefulWidget {
 
 class _EditScreenState extends State<EditScreen> {
   TextEditingController _toEditC = TextEditingController();
+  String ip = '';
+  bool isChange=false;
+
+  @override
+  void initState(){
+    super.initState();
+    ip=randomIp();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +49,8 @@ class _EditScreenState extends State<EditScreen> {
                 Text('New '+ widget.toEdit,style: AppTextStyles.normalThickText,),
                
                 SizedBox(height: 10,),
-                TextFormField(
+                widget.isIp?Text(ip,style: AppTextStyles.normalText,):
+                 TextFormField(
                     cursorColor: AppColors.appGreen,
                     controller: _toEditC,
                     style: AppTextStyles.normalText,
@@ -56,21 +68,40 @@ class _EditScreenState extends State<EditScreen> {
                     },
                   ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  mainAxisAlignment:widget.isIp?MainAxisAlignment.center:
+                   MainAxisAlignment.spaceBetween,
+                  children: widget.isIp?[
+                   Button(
+                    height: 30.sp,
+                    width: 80.sp,
+                    text: isChange?'SAVE':'CHANGE',
+                    onTap: (){
+                      if(!isChange){
+                        setState(() {
+                            ip=randomIp();  
+                            isChange=true;                           
+                          });
+                      }else{
+                        widget.onSave(ip);
+                         Navigator.pop(context);
+                      }
+                    },
+                    )
+                  ]: [
                   Button(
                     height: 30.sp,
                     width: 80.sp,
-                    text: 'Cancel',
+                    text: 'CANCEL',
                     onTap: (){
                     Navigator.pop(context);
                     },
                     ),
-                  Button(
+                   Button(
                     height: 30.sp,
                     width: 80.sp,
-                    text: 'Save',
+                    text: 'SAVE',
                     onTap: (){
+                      widget.onSave(_toEditC.value.text);
                       Navigator.pop(context);
                     },
                     )

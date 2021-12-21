@@ -6,14 +6,16 @@ import 'package:hackgame/constants/input_decoration.dart';
 import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
 import 'package:hackgame/providers/auth_provider.dart';
+import 'package:hackgame/services/user_service.dart';
 import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
 import 'package:hackgame/ui/dashboard/money_window.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hackgame/widgets/buttons.dart';
 import 'package:hackgame/widgets/edit_screen.dart';
-import 'package:hackgame/widgets/window.dart';
+import 'package:hackgame/widgets/select_avatar.dart';
 import 'package:provider/provider.dart';
+import 'package:hackgame/models/appUser.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key key}) : super(key: key);
@@ -23,9 +25,20 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
+
+  void changeAvatar(){
+    showCupertinoModalPopup(
+    context: context,
+    builder: (context) => SelectAvatar(
+      select: (img){
+          UserService().updateProfile(toEdit: 'avatar',newValue: img);
+    },));
+  }
+
   @override
   Widget build(BuildContext context) {
   final AuthProvider authProvider = Provider.of<AuthProvider>(context);
+  final AppUser user = Provider.of<AppUser>(context);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -70,22 +83,30 @@ class _AccountScreenState extends State<AccountScreen> {
                       ),
                   ),
                   SizedBox(height: 50.sp,),
-                  CircleAvatar(
-                      radius:60.sp,
-                      backgroundColor: AppColors.appGreen,
-                      child: SizedBox(
-                          width:116.sp,
-                          height:116.sp,
-                          child:CircleAvatar(
-                            radius:60.sp,
-                            backgroundColor: Colors.grey[900],
-                            backgroundImage: AssetImage('assets/images/avatars/'),
-                            
-                          )
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 60.sp,
+                        backgroundColor: AppColors.appGreen,
+                        child: SizedBox(
+                            width: 116.sp,
+                            height: 116.sp,
+                            child: CircleAvatar(
+                              radius: 60.sp,
+                              backgroundColor: Colors.grey[900],
+                              
+                              backgroundImage: AssetImage('assets/images/avatars/'+user.avatar,),
+                            )),
                       ),
+                      IconButton(
+                        onPressed: changeAvatar,
+                        icon: Icon(Icons.camera_alt,size: 40,color: AppColors.appGreen.withOpacity(0.4)),
+                        )
+                    ],
                   ),
                   SizedBox(height: 10.sp,),
-                  Text('Bright Mukonesi',style: AppTextStyles.largeThickText,),
+                  Text(user.username,style: AppTextStyles.largeThickText,),
                   SizedBox(height: 10.sp,),
                   Row(
                       children: [
@@ -98,15 +119,20 @@ class _AccountScreenState extends State<AccountScreen> {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Alias: Hackervybe',style: AppTextStyles.largeText,),
+                        Text('Alias: ${user.alias}',style: AppTextStyles.largeText,),
                         Button(
                           height: 30.sp,
                           width: 80.sp,
-                          text: 'Edit',
+                          text: 'EDIT',
                           onTap: (){
                               showCupertinoDialog(
                               context: context,
-                              builder: (context) => EditScreen(toEdit: 'Alias',));
+                              builder: (context) => EditScreen(toEdit: 'alias',onSave: (val){
+                                UserService().updateProfile(
+                                  toEdit: 'alias',
+                                  newValue: val
+                                );
+                                }));
                           },
                           )
                       ],
@@ -115,15 +141,20 @@ class _AccountScreenState extends State<AccountScreen> {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('IP address: 192.34.5.02',style: AppTextStyles.largeText,),
+                        Text('IP address: ${user.ip}',style: AppTextStyles.largeText,),
                         Button(
                           height: 30.sp,
                           width: 80.sp,
-                          text: 'Edit',
+                          text: 'EDIT',
                           onTap: (){
                               showCupertinoDialog(
                               context: context,
-                              builder: (context) => EditScreen(toEdit: 'IP',));
+                              builder: (context) => EditScreen(toEdit: 'ip',isIp: true,onSave: (val){
+                                UserService().updateProfile(
+                                  toEdit: 'ip',
+                                  newValue: val
+                                );
+                              },));
                           },
                           )
                       ],
@@ -131,13 +162,13 @@ class _AccountScreenState extends State<AccountScreen> {
                   SizedBox(height: 10.sp,),
                   Row(
                       children: [
-                        Text('Level: 50',style: AppTextStyles.largeText,),
+                        Text('Level: ${user.level}',style: AppTextStyles.largeText,),
                       ],
                   ),
                   SizedBox(height: 10.sp,),
                   Row(
                       children: [
-                        Text('Cyber reputation: 3400',style: AppTextStyles.largeText,),
+                        Text('Cyber reputation: ${user.reputation}',style: AppTextStyles.largeText,),
                       ],
                   ),
                   SizedBox(height: 20.sp,),
@@ -154,19 +185,19 @@ class _AccountScreenState extends State<AccountScreen> {
                       children: [
                         Column(
                           children: [
-                            Text('10',style: AppTextStyles.infoText,),
+                            Text(user.attacks.toString(),style: AppTextStyles.infoText,),
                             Text('Attacks',style: AppTextStyles.normalText,)
                           ],
                         ),
                         Column(
                           children: [
-                            Text('5',style: AppTextStyles.infoText,),
+                            Text(user.contracts.toString(),style: AppTextStyles.infoText,),
                             Text('Contracts',style: AppTextStyles.normalText,)
                           ],
                         ),
                         Column(
                           children: [
-                            Text('30',style: AppTextStyles.infoText,),
+                            Text(user.hacks.toString(),style: AppTextStyles.infoText,),
                             Text('Hacks',style: AppTextStyles.normalText,)
                           ],
                         ),

@@ -7,6 +7,7 @@ class AppUser {
 
   final String username;
   final String alias;
+  final String ip;
   final String avatar;
   final int money;
   final int crypto;
@@ -20,6 +21,7 @@ class AppUser {
   AppUser({
     this.username,
     this.alias,
+    this.ip,
     this.money,
     this.crypto,
     this.hacks,
@@ -37,6 +39,7 @@ class AppUser {
     return {
       'username': username,
       'alias': alias,
+      'ip':ip,
       'money': money,
       'crypto': crypto,
       'hacks': hacks,
@@ -53,6 +56,7 @@ class AppUser {
     return AppUser(
 
       username: map['username'] ?? '',
+      ip:map['ip']??'192.0.0.0',
       avatar: map['avatar']??'assets/images/avatars/'+avatars[0],
       alias: map['alias'] ?? '',
       money: map['money']?.toInt() ?? 0,

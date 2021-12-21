@@ -12,6 +12,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hackgame/widgets/buttons.dart';
 import 'package:hackgame/widgets/edit_screen.dart';
 import 'package:hackgame/widgets/window.dart';
+import 'package:provider/provider.dart';
+import 'package:hackgame/models/appUser.dart';
+
 
 class MoneyScreen extends StatefulWidget {
   const MoneyScreen({Key key}) : super(key: key);
@@ -23,6 +26,7 @@ class MoneyScreen extends StatefulWidget {
 class _MoneyScreenState extends State<MoneyScreen> {
   @override
   Widget build(BuildContext context) {
+    final AppUser user = Provider.of<AppUser>(context);
     return Scaffold(
       backgroundColor: Colors.black,
       body: Padding(
@@ -94,7 +98,7 @@ class _MoneyScreenState extends State<MoneyScreen> {
                                               text: '\$',
                                               style: AppTextStyles.themedText.copyWith(fontSize: 30.sp)),
                                           TextSpan(
-                                              text: ' 30.00',
+                                              text: user.money.toString(),
                                               style: AppTextStyles.normalThickText
                                                   .copyWith(fontSize: 30.sp)),
                                         ],

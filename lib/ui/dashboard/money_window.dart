@@ -5,6 +5,8 @@ import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
 import 'package:hackgame/ui/money_screen.dart';
 import 'package:hackgame/widgets/window.dart';
+import 'package:provider/provider.dart';
+import 'package:hackgame/models/appUser.dart';
 
 class MoneyWindow extends StatefulWidget {
   const MoneyWindow({Key key}) : super(key: key);
@@ -16,6 +18,7 @@ class MoneyWindow extends StatefulWidget {
 class _MoneyWindowState extends State<MoneyWindow> {
   @override
   Widget build(BuildContext context) {
+    final AppUser user = Provider.of<AppUser>(context);
     return Window(
       onTap: (){
     showCupertinoDialog(
@@ -43,7 +46,7 @@ class _MoneyWindowState extends State<MoneyWindow> {
                         fontWeight: FontWeight.bold,
                         color: AppColors.appGreen)),
                 TextSpan(
-                    text: ' 30',
+                    text: user.money.toString(),
                     style: AppTextStyles.normalThickText
                         .copyWith(color: Colors.white)),
               ],
