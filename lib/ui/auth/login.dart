@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         text: 'Google Login',
                         icon: Image.asset('assets/images/google_logo.png',width: 30,),
                         onTap: (){
-                          authProvider.googleLogin();
+                          authProvider.googleLogin(context);
                         },
                       ),
                       SizedBox(height: 20.sp,),
@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         text: 'Facebook Login',
                         icon: Image.asset('assets/images/facebook_logo.png',width: 40,),
                         onTap: (){
-                          authProvider.facebookLogin();
+                          authProvider.facebookLogin(context);
                         },
                       ),
                       SizedBox(height: 20.sp,),
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         text: 'Google play Login',
                         icon: Image.asset('assets/images/google_play_logo.png',width: 30,),
                         onTap: (){
-                          authProvider.facebookLogin();
+                          authProvider.facebookLogin(context);
                         },
                       )
                   ],

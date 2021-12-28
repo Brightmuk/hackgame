@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:hackgame/models/appUser.dart';
 import 'package:hackgame/services/user_service.dart';
+import 'package:hackgame/widgets/error_dialogue.dart';
 import 'dart:developer';
 import 'package:play_games/play_games.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +28,8 @@ final googleSignIn = GoogleSignIn();
 
 
 
-  Future googleLogin()async{
+  Future googleLogin(BuildContext context)async{
+    try{
     GoogleSignInAccount _account;
     final googleUser = await googleSignIn.signIn();
     if(googleUser == null)return;
@@ -42,17 +45,25 @@ final googleSignIn = GoogleSignIn();
     await FirebaseAuth.instance.signInWithCredential(credential);
     _user = await UserService().appUserFuture; 
     notifyListeners();
+    }catch(e){
+      log(e.toString());
+      showCupertinoDialog(context: context, builder: (ctx)=>ErrorDialogue(errorText: 'An error occurred, please try again',));
+    }
 
   }
 
 
-  Future facebookLogin()async{
+  Future facebookLogin(BuildContext context)async{
     final LoginResult result = await FacebookAuth.instance.login(); 
 
     if (result.status == LoginStatus.success) {
       final credential = FacebookAuthProvider.credential(result.accessToken.token);
-
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      try{
+        await FirebaseAuth.instance.signInWithCredential(credential);
+      }catch(e){
+        log(e.toString());
+        showCupertinoDialog(context: context, builder: (ctx)=>ErrorDialogue(errorText: e.toString(),));
+      }
       
     await UserService().appUserFuture; 
 
@@ -60,7 +71,10 @@ final googleSignIn = GoogleSignIn();
     } else {
         log(result.status.toString());
         log(result.message);
+        showCupertinoDialog(context: context, builder: (ctx)=>ErrorDialogue(errorText: result.message,));
     }
+
+
   }
 
 // Future googlePlayLogin()async{

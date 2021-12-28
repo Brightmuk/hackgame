@@ -13,7 +13,7 @@ import 'package:hackgame/ui/dashboard/assets_window.dart';
 import 'package:hackgame/ui/dashboard/contracts_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
 import 'package:hackgame/ui/dashboard/device_status_window.dart';
-import 'package:hackgame/ui/dashboard/exploits_window.dart';
+import 'package:hackgame/ui/dashboard/tools_window.dart';
 import 'package:hackgame/ui/dashboard/messages_window.dart';
 import 'package:hackgame/ui/dashboard/money_window.dart';
 import 'package:hackgame/ui/dashboard/processes_window.dart';
@@ -85,7 +85,7 @@ class _DashBoardState extends State<DashBoard> {
                 children: [
                   Container(
                       height: AppSizes.screenHeight(context) * 0.4,
-                      child: ExploitsWindow()),
+                      child: ToolsWindow()),
                   Container(
                     height: AppSizes.screenHeight(context) * 0.4,
                     child: Column(

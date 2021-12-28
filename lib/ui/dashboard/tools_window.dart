@@ -3,21 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
-import 'package:hackgame/ui/exploits_screen.dart';
+import 'package:hackgame/models/tools.dart';
+import 'package:hackgame/services/tools_service.dart';
+import 'package:hackgame/ui/tools_screen.dart';
 import 'package:hackgame/ui/single_exploit.dart';
 import 'package:hackgame/widgets/buttons.dart';
 import 'package:hackgame/widgets/buy_dialogue.dart';
 import 'package:hackgame/widgets/window.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ExploitsWindow extends StatefulWidget {
-  const ExploitsWindow({Key key}) : super(key: key);
+class ToolsWindow extends StatefulWidget {
+  const ToolsWindow({Key key}) : super(key: key);
 
   @override
-  _ExploitsWindowState createState() => _ExploitsWindowState();
+  _ToolsWindowState createState() => _ToolsWindowState();
 }
 
-class _ExploitsWindowState extends State<ExploitsWindow> {
+class _ToolsWindowState extends State<ToolsWindow> {
   @override
   Widget build(BuildContext context) {
     return Window(
@@ -37,41 +39,21 @@ class _ExploitsWindowState extends State<ExploitsWindow> {
             ),
             Container(
               height: AppSizes.screenHeight(context) * 0.25,
-              child: ListView.builder(
-                  itemCount: 6,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      padding: EdgeInsets.only(bottom: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset(
-                            'assets/images/hack_icon.png',
-                            height: 40,
-                            width: 50,
-                          ),
-                          Text(
-                            'Netsh ${index + 1}',
-                            style: AppTextStyles.normalText,
-                          ),
-                          SizedBox(width: 40.sp,),
-                          Button(
-                            miniButton: true,
-                          height: 25.sp,
-                          width: 60.sp,
-                          text: 'LAUNCH',
-                          onTap: (){
-
-                            showCupertinoDialog(
-                            context: context,
-                            builder: (context) =>SingleExploitScreen());
-                            
-                          },
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
+              child: StreamBuilder<List<Tool>>(
+                stream: ToolsService().getUserTools,
+                builder: (context, snapshot) {
+                    if(snapshot.connectionState==ConnectionState.waiting){
+                          CircularProgressIndicator(
+                            valueColor: new AlwaysStoppedAnimation<Color>(AppColors.appGreen),
+                          );
+                    }
+                    if(snapshot.hasData){
+                      return ToolList(tools: snapshot.data,);
+                    }else{
+                      return Text('Error',style: AppTextStyles.miniText,);
+                    }
+                }
+              ),
             ),
             Divider(
               color: Colors.grey[500],
@@ -111,5 +93,54 @@ class _ExploitsWindowState extends State<ExploitsWindow> {
       height: AppSizes.screenHeight(context) * 0.4,
       width: AppSizes.screenWidth(context) * 0.54,
     );
+  }
+}
+
+class ToolList extends StatelessWidget {
+  final List<Tool> tools;
+  const ToolList({ Key key,this.tools }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if(tools.length>1){
+      return ListView.builder(
+          itemCount: tools.length,
+          itemBuilder: (context, index) {
+            return Container(
+              padding: EdgeInsets.only(bottom: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    'assets/images/hack_icon.png',
+                    height: 40,
+                    width: 50,
+                  ),
+                  Text(
+                    'Netsh ${index + 1}',
+                    style: AppTextStyles.normalText,
+                  ),
+                  SizedBox(width: 40.sp,),
+                  Button(
+                    miniButton: true,
+                  height: 25.sp,
+                  width: 60.sp,
+                  text: 'LAUNCH',
+                  onTap: (){
+
+                    showCupertinoDialog(
+                    context: context,
+                    builder: (context) =>SingleExploitScreen());
+                    
+                  },
+                  ),
+                ],
+              ),
+            );
+          });
+    }else{
+      return Center(child: Text('No tools',style: AppTextStyles.miniText,));
+    }
+
   }
 }

@@ -27,35 +27,63 @@ class Button extends StatefulWidget {
   _ButtonState createState() => _ButtonState();
 }
 
-class _ButtonState extends State<Button> {
+class _ButtonState extends State<Button> with SingleTickerProviderStateMixin{
+  AnimationController _controller;
+  Animation _colorTween;
+
+
+  void initState(){
+    super.initState();
+    _controller=AnimationController(vsync: this, duration: Duration(milliseconds: 10));
+    _colorTween = ColorTween(begin: AppColors.fadedWhite, end: AppColors.fadedWhite.withOpacity(0.3))
+        .animate(_controller);
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Stack(
         children: [
           GestureDetector(
-            onTap: widget.onTap,
-            child: Container(
-              width: widget.width,
-              height: widget.height,
-              child: widget.icon==null? Center(
-                  child: Text(
-                widget.text,
-                style: widget.miniButton?AppTextStyles.normalText.copyWith(fontSize: 10):
-                 AppTextStyles.normalText,
-              )):Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                widget.icon,
-                SizedBox(width: 10,),
-                Text(
-                widget.text,
-                style: widget.miniButton?AppTextStyles.normalText.copyWith(fontSize: 10):
-                 AppTextStyles.normalText,
-              )
-              ],),
-              color: AppColors.fadedWhite,
-              padding: EdgeInsets.all(5),
+            onTap: (){
+               _controller.forward();
+               Future.delayed(Duration(milliseconds: 100),(){
+                 _controller.reverse();
+               });
+               
+              widget.onTap();
+            },
+            child: AnimatedBuilder(
+              animation: _colorTween,
+              builder: (context, child) {
+                return Container(
+                  width: widget.width,
+                  height: widget.height,
+                  child: widget.icon==null? Center(
+                      child: Text(
+                    widget.text,
+                    style: widget.miniButton?AppTextStyles.normalText.copyWith(fontSize: 10):
+                     AppTextStyles.normalText,
+                  )):Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                    widget.icon,
+                    SizedBox(width: 10,),
+                    Text(
+                    widget.text,
+                    style: widget.miniButton?AppTextStyles.normalText.copyWith(fontSize: 10):
+                     AppTextStyles.normalText,
+                  )
+                  ],),
+                  color: _colorTween.value,
+                  padding: EdgeInsets.all(5),
+                );
+              }
             ),
           ),
           Positioned(
