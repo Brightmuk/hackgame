@@ -10,21 +10,20 @@ import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
 import 'package:hackgame/ui/dashboard/money_window.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hackgame/ui/single_asset.dart';
-import 'package:hackgame/widgets/action_dialogue.dart';
+import 'package:hackgame/ui/single_exploit.dart';
 import 'package:hackgame/widgets/buttons.dart';
 import 'package:hackgame/widgets/buy_dialogue.dart';
 import 'package:hackgame/widgets/window.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class AssetsScreen extends StatefulWidget {
-  const AssetsScreen({Key key}) : super(key: key);
+class MessagesScreen extends StatefulWidget {
+  const MessagesScreen({Key key}) : super(key: key);
 
   @override
-  _AssetsScreenState createState() => _AssetsScreenState();
+  _MessagesScreenState createState() => _MessagesScreenState();
 }
 
-class _AssetsScreenState extends State<AssetsScreen> {
+class _MessagesScreenState extends State<MessagesScreen> {
   int currentTab = 0;
 
   void changeTab(index) {
@@ -38,8 +37,6 @@ class _AssetsScreenState extends State<AssetsScreen> {
       case 0:
         return Store();
       case 1:
-        return Auction();
-      case 2:
         return Inventory();
       default:
         return Container();
@@ -97,14 +94,14 @@ class _AssetsScreenState extends State<AssetsScreen> {
                               changeTab(0);
                             },
                             child: Container(
-                              height: 40.sp,
-                              padding: EdgeInsets.symmetric(horizontal: 10),
+                               height: 40.sp,
+                              padding: EdgeInsets.symmetric(horizontal:10),
                               color: currentTab == 0
                                   ? AppColors.fadedWhite
                                   : Colors.transparent,
                               child: Center(
                                   child: Text(
-                                'Store',
+                                'Notifications',
                                 style: AppTextStyles.normalText,
                               )),
                             ),
@@ -114,28 +111,13 @@ class _AssetsScreenState extends State<AssetsScreen> {
                               changeTab(1);
                             },
                             child: Container(
-                              height: 40.sp,
-                              padding: EdgeInsets.symmetric(horizontal: 10),
+                               height: 40.sp,
+                             padding: EdgeInsets.symmetric(horizontal:10),
                               color: currentTab == 1
                                   ? AppColors.fadedWhite
                                   : Colors.transparent,
                               child: Center(
-                                  child: Text('Auction',
-                                      style: AppTextStyles.normalText)),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              changeTab(2);
-                            },
-                            child: Container(
-                              height: 40.sp,
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              color: currentTab == 2
-                                  ? AppColors.fadedWhite
-                                  : Colors.transparent,
-                              child: Center(
-                                  child: Text('Inventory',
+                                  child: Text('Inbox',
                                       style: AppTextStyles.normalText)),
                             ),
                           )
@@ -146,9 +128,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
                       height: 2,
                       color: AppColors.appGreen,
                     ),
-                    SizedBox(
-                      height: 20.sp,
-                    ),
+                    SizedBox(height: 20.sp,),
                     Container(
                       child: currentTabDisplay(currentTab),
                     )
@@ -162,127 +142,86 @@ class _AssetsScreenState extends State<AssetsScreen> {
 }
 
 class Store extends StatelessWidget {
-  const Store({Key key}) : super(key: key);
+  const Store({ Key key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ExploitList(isPurchased: false,),
+      child: ExploitList(isMessage: false,),
     );
   }
 }
-
-class Auction extends StatelessWidget {
-  const Auction({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ExploitList(isPurchased: false,),
-    );
-  }
-}
-
 class Inventory extends StatelessWidget {
-  const Inventory({Key key}) : super(key: key);
+  const Inventory({ Key key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ExploitList(isPurchased: true,),
+      child: ExploitList(isMessage: true,),
     );
   }
 }
 
 class ExploitList extends StatelessWidget {
-  final bool isPurchased;
-  const ExploitList({Key key,this.isPurchased}) : super(key: key);
+  final bool isMessage;
+  const ExploitList({ Key key,this.isMessage }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: AppSizes.screenHeight(context) * 0.8,
-      child: ListView.builder(
+    return GestureDetector(
+      onTap: (){
+
+      },
+      child: Container(
+        height: AppSizes.screenHeight(context)*0.8,
+        child: ListView.builder(
           itemCount: 10,
-          itemBuilder: (context, index) {
+          itemBuilder: (context,index){
             return Container(
-              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.house_outlined,
-                    color: AppColors.appGreen,
-                  ),
+                  Icon(Icons.notifications_outlined,color: AppColors.appGreen,),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Netsh',
-                        style: AppTextStyles.normalThickText,
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          style: DefaultTextStyle.of(context).style,
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: '\$',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.appGreen)),
-                            TextSpan(
-                                text: ' 3000',
-                                style: AppTextStyles.macroText
-                                    .copyWith(color: AppColors.appOrange)
-                                    .copyWith(color: Colors.white)),
-                            TextSpan(
-                                text: ' or ',
-                                style: AppTextStyles.normalText
-                                    .copyWith(color: Colors.white)),
-                            TextSpan(
-                                text: 'C',
-                                style: AppTextStyles.macroText.copyWith(
-                                    color: AppColors.appGold,
-                                    fontWeight: FontWeight.bold)),
-                            TextSpan(
-                                text: ' 200',
-                                style: AppTextStyles.macroText
-                                    .copyWith(color: Colors.white)),
-                          ],
-                        ),
-                      ),
+                      Text('James',style: AppTextStyles.normalThickText,),
+                      Text('Hello, I wanna pay the ransom',style: AppTextStyles.macroText,),
+                      Text('2021-23-2',style: AppTextStyles.miniText,)
+                     
                     ],
                   ),
-                  SizedBox(
-                    width: 130.sp,
-                  ),
+                  SizedBox(width: 130.sp,),
                   Button(
                     height: 30.sp,
                     width: 80.sp,
-                    text: isPurchased?'VIEW': 'BUY',
-                    onTap: () {
-                      if(isPurchased){
+                    text: isMessage?'VIEW':'OK',
+                    onTap: (){
+                      if(isMessage){
                         showCupertinoDialog(
                         context: context,
-                        builder: (context) =>SingleAssetScreen());
+                        builder: (context) =>SingleExploitScreen());
                       }else{
-                      showModalBottomSheet(
+                      showCupertinoDialog(
                           context: context,
-                          backgroundColor: Colors.transparent,
+                          // backgroundColor: Colors.transparent,
                           builder: (context) {
                             return BuyDialogue(
                               moneyAmount: 4500,
                               cryptoAmount: 400,
-                              infoText: 'Buy the Harraein at',
+                              infoText: 'Buy the password cracker',
                             );
                           });
                       }
                     },
-                  ),
+                    ),
                 ],
               ),
             );
-          }),
+          }
+          ),
+      ),
     );
   }
 }

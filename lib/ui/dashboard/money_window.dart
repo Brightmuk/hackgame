@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
+import 'package:hackgame/providers/auth_provider.dart';
 import 'package:hackgame/ui/money_screen.dart';
 import 'package:hackgame/widgets/window.dart';
 import 'package:provider/provider.dart';
 import 'package:hackgame/models/appUser.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MoneyWindow extends StatefulWidget {
+  
   const MoneyWindow({Key key}) : super(key: key);
 
   @override
@@ -18,7 +21,9 @@ class MoneyWindow extends StatefulWidget {
 class _MoneyWindowState extends State<MoneyWindow> {
   @override
   Widget build(BuildContext context) {
-    final AppUser user = Provider.of<AppUser>(context);
+  final AuthProvider authProvider = Provider.of<AuthProvider>(context);
+  final AppUser user = authProvider.user;
+
     return Window(
       onTap: (){
     showCupertinoDialog(
@@ -32,19 +37,17 @@ class _MoneyWindowState extends State<MoneyWindow> {
         ));
       },
       content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(),
+         
           RichText(
             text: TextSpan(
               style: DefaultTextStyle.of(context).style,
               children: <TextSpan>[
                 TextSpan(
-                    text: '\$',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.appGreen)),
+                    text: 'c ',
+                    style: AppTextStyles.themedHeader,),
                 TextSpan(
                     text: user.money.toString(),
                     style: AppTextStyles.normalThickText
@@ -52,15 +55,10 @@ class _MoneyWindowState extends State<MoneyWindow> {
               ],
             ),
           ),
-          Icon(
-            Icons.add,
-            color: AppColors.appGreen,
-            size: 20,
-          )
         ],
       ),
       height: AppSizes.screenHeight(context) * 0.047,
-      width: 100,
+      width: 70.sp,
     );
   }
 }

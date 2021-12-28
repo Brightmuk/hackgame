@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/input_decoration.dart';
 import 'package:hackgame/constants/sizes.dart';
+import 'package:hackgame/constants/style_widgets.dart';
 import 'package:hackgame/constants/text_styles.dart';
+import 'package:hackgame/providers/auth_provider.dart';
 import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
 import 'package:hackgame/ui/dashboard/money_window.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hackgame/widgets/action_dialogue.dart';
 import 'package:hackgame/widgets/buttons.dart';
 import 'package:hackgame/widgets/edit_screen.dart';
 import 'package:hackgame/widgets/window.dart';
@@ -26,18 +29,16 @@ class MoneyScreen extends StatefulWidget {
 class _MoneyScreenState extends State<MoneyScreen> {
   @override
   Widget build(BuildContext context) {
-    final AppUser user = Provider.of<AppUser>(context);
+  final AuthProvider authProvider = Provider.of<AuthProvider>(context);
+  final AppUser user = authProvider.user;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Padding(
         padding: AppSizes.windowPadding,
         child: Stack(children: [
           Container(
-            decoration: BoxDecoration(
-                color: Colors.black,
-                image: DecorationImage(
-                    image: AssetImage('assets/images/background.jpg'),
-                    fit: BoxFit.cover)),
+            decoration: StyleWidgets.pageDecoration,
           ),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
@@ -95,8 +96,8 @@ class _MoneyScreenState extends State<MoneyScreen> {
                                         style: DefaultTextStyle.of(context).style,
                                         children: <TextSpan>[
                                           TextSpan(
-                                              text: '\$',
-                                              style: AppTextStyles.themedText.copyWith(fontSize: 30.sp)),
+                                              text: 'c',
+                                              style: AppTextStyles.themedHeader.copyWith(fontSize: 30.sp)),
                                           TextSpan(
                                               text: user.money.toString(),
                                               style: AppTextStyles.normalThickText
@@ -134,8 +135,8 @@ class _MoneyScreenState extends State<MoneyScreen> {
                               style: DefaultTextStyle.of(context).style,
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: '\$',
-                                    style: AppTextStyles.themedText.copyWith(fontSize: 20)),
+                                    text: 'c',
+                                    style: AppTextStyles.themedHeader.copyWith(fontSize: 20)),
                                 TextSpan(
                                     text: ' 100',
                                     style: AppTextStyles.normalThickText
@@ -151,7 +152,7 @@ class _MoneyScreenState extends State<MoneyScreen> {
                             onTap: (){
                                 showCupertinoDialog(
                                 context: context,
-                                builder: (context) => EditScreen(toEdit: 'IP',));
+                                builder: (context) => ActionDialogue(action: (){},actionBtnText: 'Ksh.300',infoText: 'Buy 100 game ksh',));
                             },
                             )
                         ],
@@ -169,8 +170,8 @@ class _MoneyScreenState extends State<MoneyScreen> {
                               style: DefaultTextStyle.of(context).style,
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: '\$',
-                                    style: AppTextStyles.themedText.copyWith(fontSize: 20)),
+                                    text: 'c',
+                                    style: AppTextStyles.themedHeader.copyWith(fontSize: 20)),
                                 TextSpan(
                                     text: ' 100',
                                     style: AppTextStyles.normalThickText
@@ -186,7 +187,7 @@ class _MoneyScreenState extends State<MoneyScreen> {
                             onTap: (){
                                 showCupertinoDialog(
                                 context: context,
-                                builder: (context) => EditScreen(toEdit: 'IP',));
+                                builder: (context) => ActionDialogue(action: (){},actionBtnText: 'Ksh.300',infoText: 'Buy 100 game ksh',));
                             },
                             )
                         ],
@@ -204,8 +205,8 @@ class _MoneyScreenState extends State<MoneyScreen> {
                               style: DefaultTextStyle.of(context).style,
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: '\$',
-                                    style: AppTextStyles.themedText.copyWith(fontSize: 20)),
+                                    text: 'c',
+                                    style: AppTextStyles.themedHeader.copyWith(fontSize: 20)),
                                 TextSpan(
                                     text: ' 100',
                                     style: AppTextStyles.normalThickText
@@ -221,7 +222,7 @@ class _MoneyScreenState extends State<MoneyScreen> {
                             onTap: (){
                                 showCupertinoDialog(
                                 context: context,
-                                builder: (context) => EditScreen(toEdit: 'IP',));
+                                builder: (context) => ActionDialogue(action: (){},actionBtnText: 'Ksh.300',infoText: 'Buy 100 game ksh',));
                             },
                             )
                         ],
@@ -239,8 +240,8 @@ class _MoneyScreenState extends State<MoneyScreen> {
                               style: DefaultTextStyle.of(context).style,
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: '\$',
-                                    style: AppTextStyles.themedText.copyWith(fontSize: 20)),
+                                    text: 'c',
+                                    style: AppTextStyles.themedHeader.copyWith(fontSize: 20)),
                                 TextSpan(
                                     text: ' 100',
                                     style: AppTextStyles.normalThickText
@@ -256,7 +257,7 @@ class _MoneyScreenState extends State<MoneyScreen> {
                             onTap: (){
                                 showCupertinoDialog(
                                 context: context,
-                                builder: (context) => EditScreen(toEdit: 'IP',));
+                                builder: (context) => ActionDialogue(action: (){},actionBtnText: 'Ksh.300',infoText: 'Buy 100 game ksh',));
                             },
                             )
                         ],
@@ -274,8 +275,8 @@ class _MoneyScreenState extends State<MoneyScreen> {
                               style: DefaultTextStyle.of(context).style,
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: '\$',
-                                    style: AppTextStyles.themedText.copyWith(fontSize: 20)),
+                                    text: 'c',
+                                    style: AppTextStyles.themedHeader.copyWith(fontSize: 20)),
                                 TextSpan(
                                     text: ' 100',
                                     style: AppTextStyles.normalThickText
@@ -291,7 +292,7 @@ class _MoneyScreenState extends State<MoneyScreen> {
                             onTap: (){
                                 showCupertinoDialog(
                                 context: context,
-                                builder: (context) => EditScreen(toEdit: 'IP',));
+                                builder: (context) => ActionDialogue(action: (){},actionBtnText: 'Ksh.300',infoText: 'Buy 100 game ksh',));
                             },
                             )
                         ],

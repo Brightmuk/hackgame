@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audioplayers.dart';
 
 class Window extends StatefulWidget {
   final Function onTap;
@@ -31,21 +31,21 @@ class Window extends StatefulWidget {
 }
 
 class _WindowState extends State<Window> {
-  AudioCache _audioCache;
+  // AudioCache _audioCache;
 
-  void initState() {
-    super.initState();
-    _audioCache = AudioCache(
-      prefix: 'assets/audio/',
-      fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP),
-    );
-  }
+  // void initState() {
+  //   super.initState();
+  //   _audioCache = AudioCache(
+  //     prefix: 'assets/audio/',
+  //     fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-      _audioCache.play('window-click.wav');
+      // _audioCache.play('window-click.wav');
       widget.onTap();
       },
       child: Container(

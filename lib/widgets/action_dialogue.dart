@@ -16,40 +16,43 @@ class ActionDialogue extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(20),
-      child: Window(
-        height: 180.sp,
-        color: Colors.black,
-        width: AppSizes.screenWidth(context)*0.9,
-        content: Scaffold(
-          backgroundColor: Colors.black,
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(infoText,style: AppTextStyles.normalThickText,),
-             
-              SizedBox(height: 10,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
+      child: Center(
+        child: Window(
+          height: 180.sp,
+          color: Colors.black,
+          width: AppSizes.screenWidth(context)*0.9,
+          content: Scaffold(
+            backgroundColor: Colors.black,
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(infoText,style: AppTextStyles.normalThickText,),
+               
+                SizedBox(height: 10,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
 
-                    Button(
-                      height: 30.sp,
-                      width: 80.sp,
-                      text: 'NO',
-                      onTap: () {
-                         Navigator.pop(context);
-                      },
-                    ),
-                    Button(
-                      height: 30.sp,
-                      width: 80.sp,
-                      text: actionBtnText,
-                      onTap: () {
-                         Navigator.pop(context);
-                      },
-                    ),
-              ],)
-            ],
+                      Button(
+                        height: 30.sp,
+                        width: 80.sp,
+                        text: 'NO',
+                        onTap: () {
+                           Navigator.pop(context);
+                        },
+                      ),
+                      Button(
+                        height: 30.sp,
+                        width: 80.sp,
+                        text: actionBtnText,
+                        onTap: () {
+                          action();
+                           Navigator.pop(context);
+                        },
+                      ),
+                ],)
+              ],
+            ),
           ),
         ),
       ),

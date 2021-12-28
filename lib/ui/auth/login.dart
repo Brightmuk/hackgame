@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
+import 'package:hackgame/constants/style_widgets.dart';
+import 'package:hackgame/constants/text_styles.dart';
 import 'package:hackgame/providers/auth_provider.dart';
 import 'package:hackgame/widgets/buttons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,30 +26,41 @@ class _LoginScreenState extends State<LoginScreen> {
       final AuthProvider authProvider = Provider.of<AuthProvider>(context);
 
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Padding(
-        padding: AppSizes.windowPadding,
-        child: Stack(children: [
-          Container(
-
-            decoration: BoxDecoration(
-                color: Colors.black,
-                image: DecorationImage(
-                    image: AssetImage('assets/images/background.jpg'),
-                    fit: BoxFit.cover)),
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          new Container(
+            decoration: StyleWidgets.pageDecoration
           ),
-          BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-            child: SafeArea(
-                child: SingleChildScrollView(
-              child: Container(
-              
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        height: AppSizes.screenHeight(context)*0.7,
+          new Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              new Expanded(
+                flex: 2,
+                child: new Container(
+                    child: new Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      child: Hero(
+                        tag: "splashscreenImage",
+                        child: new Container(child: Image.asset('assets/images/hacker_logo.png'),),
                       ),
+                      radius: 100.sp,
+                    ),
+                    new Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                    ),
+                    Text('Hacked',textScaleFactor: 2,style: AppTextStyles.themedHeader.copyWith(fontSize: 25),),
+                  ],
+                )),
+              ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
                       Button(
                         width: AppSizes.screenWidth(context)*0.9,
                         text: 'Google Login',
@@ -74,12 +87,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           authProvider.facebookLogin();
                         },
                       )
-                    ]),
+                  ],
+                ),
               ),
-            )),
+            ],
           ),
-        ]),
+        ],
       ),
     );
   }
 }
+

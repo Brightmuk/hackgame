@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Hackgame</string>
-    <string name="facebook_app_id">423857289285009</string>
-    <string name="fb_login_protocol_scheme">fb423857289285009</string>
-    <string name="facebook_client_token">2408da182e69da0493f1eb03799529c7</string>
+    <string name="app_name">Hacked</string>
+    <string name="facebook_app_id">454072983056431</string>
+    <string name="fb_login_protocol_scheme">fb454072983056431</string>
+    <string name="facebook_client_token">20697928b6d207d2b655a32764fd0a94</string>
 </resources>

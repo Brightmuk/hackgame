@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
+import 'package:hackgame/constants/style_widgets.dart';
+import 'package:hackgame/models/appUser.dart';
 import 'package:hackgame/ui/account_screen.dart';
 import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/activity_logger_window.dart';
@@ -12,6 +14,7 @@ import 'package:hackgame/ui/dashboard/contracts_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
 import 'package:hackgame/ui/dashboard/device_status_window.dart';
 import 'package:hackgame/ui/dashboard/exploits_window.dart';
+import 'package:hackgame/ui/dashboard/messages_window.dart';
 import 'package:hackgame/ui/dashboard/money_window.dart';
 import 'package:hackgame/ui/dashboard/processes_window.dart';
 
@@ -32,11 +35,7 @@ class _DashBoardState extends State<DashBoard> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-                color: Colors.black,
-                image: DecorationImage(
-                    image: AssetImage('assets/images/background.jpg'),
-                    fit: BoxFit.cover)),
+            decoration: StyleWidgets.pageDecoration,
           ),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
@@ -53,11 +52,13 @@ class _DashBoardState extends State<DashBoard> {
             Container(
               width: AppSizes.screenWidth(context),
               height: AppSizes.screenHeight(context) * 0.05,
-              child: Stack(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Positioned(left: 0,child: AccountWindow()),
-                  Positioned(right: 125, child: MoneyWindow()),
-                  Positioned(right: 0, child: CryptoWindow())
+                  AccountWindow(),
+                  MoneyWindow(),
+                  CryptoWindow(),
+                  MessagesWindow()
                 ],
               ),
             ),

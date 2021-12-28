@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/input_decoration.dart';
 import 'package:hackgame/constants/sizes.dart';
+import 'package:hackgame/constants/style_widgets.dart';
 import 'package:hackgame/constants/text_styles.dart';
 import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
@@ -51,11 +52,7 @@ class _ContractScreenState extends State<ContractScreen> {
         padding: AppSizes.windowPadding,
         child: Stack(children: [
           Container(
-            decoration: BoxDecoration(
-                color: Colors.black,
-                image: DecorationImage(
-                    image: AssetImage('assets/images/background.jpg'),
-                    fit: BoxFit.cover)),
+            decoration: StyleWidgets.pageDecoration,
           ),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
@@ -259,9 +256,9 @@ class ExploitList extends StatelessWidget {
                   text: signed? 'QUIT':'SIGN',
                   onTap: (){
                     if(signed){
-                      showModalBottomSheet(
+                      showCupertinoDialog(
                         context: context,
-                        backgroundColor: Colors.transparent,
+                        
                         builder: (context) {
                           return ActionDialogue(
                             actionBtnText: 'QUIT',
@@ -269,9 +266,9 @@ class ExploitList extends StatelessWidget {
                           );
                         });
                     }else{
-                      showModalBottomSheet(
+                      showCupertinoDialog(
                         context: context,
-                        backgroundColor: Colors.transparent,
+                        
                         builder: (context) {
                           return ActionDialogue(
                             actionBtnText: 'SIGN',

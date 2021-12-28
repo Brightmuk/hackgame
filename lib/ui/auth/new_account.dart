@@ -5,10 +5,12 @@ import 'package:hackgame/constants/avatart.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/input_decoration.dart';
 import 'package:hackgame/constants/sizes.dart';
+import 'package:hackgame/constants/style_widgets.dart';
 import 'package:hackgame/constants/text_styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hackgame/functions/random_ip.dart';
+import 'package:hackgame/providers/auth_provider.dart';
 import 'package:hackgame/services/user_service.dart';
 import 'package:hackgame/widgets/buttons.dart';
 import 'package:hackgame/widgets/select_avatar.dart';
@@ -52,11 +54,7 @@ class _NewAccountState extends State<NewAccount> {
         padding: AppSizes.windowPadding,
         child: Stack(children: [
           Container(
-            decoration: BoxDecoration(
-                color: Colors.black,
-                image: DecorationImage(
-                    image: AssetImage('assets/images/background.jpg'),
-                    fit: BoxFit.cover)),
+            decoration: StyleWidgets.pageDecoration
           ),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
@@ -74,6 +72,15 @@ class _NewAccountState extends State<NewAccount> {
                           'Setup your hacker profile',
                           style: AppTextStyles.themedHeader.copyWith(fontSize: 30),
                         ),
+                                          Button(
+                      width: AppSizes.screenWidth(context)*0.9,
+                      height: 40.sp,
+                      text: 'Logout',
+                      onTap: ()async{
+                          AuthProvider().signOut();
+                        
+                      },
+                      ),
                         SizedBox(
                           height: 50.sp,
                         ),

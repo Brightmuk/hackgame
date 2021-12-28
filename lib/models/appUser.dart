@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hackgame/constants/avatart.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:developer';
 
 class AppUser {
 
@@ -53,6 +54,7 @@ class AppUser {
   }
 
   factory AppUser.fromMap(Map<String, dynamic> map) {
+    log(map.toString());
     return AppUser(
 
       username: map['username'] ?? '',

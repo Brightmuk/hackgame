@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/input_decoration.dart';
 import 'package:hackgame/constants/sizes.dart';
+import 'package:hackgame/constants/style_widgets.dart';
 import 'package:hackgame/constants/text_styles.dart';
+import 'package:hackgame/providers/auth_provider.dart';
 import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
 import 'package:hackgame/ui/dashboard/money_window.dart';
@@ -25,18 +27,15 @@ class CryptoScreen extends StatefulWidget {
 class _CryptoScreenState extends State<CryptoScreen> {
   @override
   Widget build(BuildContext context) {
-    final AppUser user = Provider.of<AppUser>(context);
+  final AuthProvider authProvider = Provider.of<AuthProvider>(context);
+  final AppUser user = authProvider.user;
     return Scaffold(
       backgroundColor: Colors.black,
       body: Padding(
         padding: AppSizes.windowPadding,
         child: Stack(children: [
           Container(
-            decoration: BoxDecoration(
-                color: Colors.black,
-                image: DecorationImage(
-                    image: AssetImage('assets/images/background.jpg'),
-                    fit: BoxFit.cover)),
+            decoration: StyleWidgets.pageDecoration,
           ),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),

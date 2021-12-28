@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/input_decoration.dart';
 import 'package:hackgame/constants/sizes.dart';
+import 'package:hackgame/constants/style_widgets.dart';
 import 'package:hackgame/constants/text_styles.dart';
 import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
@@ -48,11 +49,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
         padding: AppSizes.windowPadding,
         child: Stack(children: [
           Container(
-            decoration: BoxDecoration(
-                color: Colors.black,
-                image: DecorationImage(
-                    image: AssetImage('assets/images/background.jpg'),
-                    fit: BoxFit.cover)),
+            decoration: StyleWidgets.pageDecoration,
           ),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
@@ -179,33 +176,42 @@ class HardwareTab extends StatelessWidget {
         ),
         Row(
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'CPU: ',
-                  style: AppTextStyles.normalThickText,
-                ),
-              ],
+            Container(
+              height: 60.sp,
+              color: AppColors.fadedWhite.withOpacity(0.2),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'CPU ',
+                    style: AppTextStyles.normalThickText,
+                  ),
+                ],
+              ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  '12th gen',
-                  style: AppTextStyles.normalText,
-                ),
-                Text(
-                  '3.0 GHz base clock speed',
-                  style: AppTextStyles.normalText,
-                ),
-                Text(
-                  '3.6 GHz max boost speed',
-                  style: AppTextStyles.normalText,
-                ),
-              ],
+            Container(
+              height: 60.sp,
+              color: AppColors.fadedWhite.withOpacity(0.1),
+              width: 380.sp,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    ' 12th gen',
+                    style: AppTextStyles.normalText,
+                  ),
+                  Text(
+                    ' 3.0 GHz base clock speed',
+                    style: AppTextStyles.normalText,
+                  ),
+                  Text(
+                    ' 3.6 GHz max boost speed',
+                    style: AppTextStyles.normalText,
+                  ),
+                ],
+              ),
             )
           ],
         ),
@@ -214,24 +220,33 @@ class HardwareTab extends StatelessWidget {
         ),
         Row(
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'RAM: ',
-                  style: AppTextStyles.normalThickText,
-                ),
-              ],
+            Container(
+              height: 60.sp,
+              color: AppColors.fadedWhite.withOpacity(0.2),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'RAM ',
+                    style: AppTextStyles.normalThickText,
+                  ),
+                ],
+              ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '2400 MHz clock frequency',
-                  style: AppTextStyles.normalText,
-                ),
-              ],
+            Container(
+              height: 60.sp,
+              width: 380.sp,
+              color: AppColors.fadedWhite.withOpacity(0.1),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '2400 MHz clock frequency',
+                    style: AppTextStyles.normalText,
+                  ),
+                ],
+              ),
             )
           ],
         ),
@@ -329,31 +344,41 @@ class SoftwareTab extends StatelessWidget {
         SizedBox(
           height: 10.sp,
         ),
-         Row(
+        Row(
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'OS: ',
-                  style: AppTextStyles.normalThickText,
-                ),
-              ],
+            Container(
+              height: 60.sp,
+              color: AppColors.fadedWhite.withOpacity(0.2),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'OS ',
+                    style: AppTextStyles.normalThickText,
+                  ),
+                ],
+              ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'Level 12',
-                  style: AppTextStyles.normalText,
-                ),
-                Text(
-                  '64-bit',
-                  style: AppTextStyles.normalText,
-                ),
-              ],
+            Container(
+              height: 60.sp,
+              color: AppColors.fadedWhite.withOpacity(0.1),
+              width: 380.sp,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    ' Level 12',
+                    style: AppTextStyles.normalText,
+                  ),
+                  Text(
+                    ' 64-bit',
+                    style: AppTextStyles.normalText,
+                  ),
+                  Text(' Level 23 Kernel',style: AppTextStyles.normalText,)
+                ],
+              ),
             )
           ],
         ),
@@ -362,30 +387,41 @@ class SoftwareTab extends StatelessWidget {
         ),
         Row(
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'Antivirus: ',
-                  style: AppTextStyles.normalThickText,
-                ),
-              ],
+            Container(
+              height: 60.sp,
+              color: AppColors.fadedWhite.withOpacity(0.2),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Antivirus ',
+                    style: AppTextStyles.normalThickText,
+                  ),
+                ],
+              ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Level 6',
-                  style: AppTextStyles.normalText,
-                ),
-              ],
+            Container(
+              height: 60.sp,
+              color: AppColors.fadedWhite.withOpacity(0.1),
+              width: 350.sp,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    ' Level 34',
+                    style: AppTextStyles.normalText,
+                  ),
+
+                ],
+              ),
             )
           ],
         ),
 
         SizedBox(
-          height: 50.sp,
+          height: 20.sp,
         ),
 
         Row(
@@ -403,54 +439,7 @@ class SoftwareTab extends StatelessWidget {
         SizedBox(
           height: 20.sp,
         ),
-        Row(
-          children: [
-            Text('OS',style: AppTextStyles.normalThickText,),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CircularPercentIndicator(
-              radius: AppSizes.screenWidth(context) * 0.2,
-              lineWidth: 5.0,
-              percent: 0.9,
-              center: Text(
-                "90%",
-                style: AppTextStyles.normalText,
-              ),
-              progressColor: AppColors.appRed,
-              backgroundColor: Colors.black,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Comments',
-                  style: AppTextStyles.normalThickText,
-                ),
-                Text('Fair',
-                    style: AppTextStyles.normalText.copyWith(
-                      color: AppColors.appOrange,
-                    ))
-              ],
-            ),
-            Button(
-              height: 30.sp,
-              width: 80.sp,
-              text: 'UPGRADE',
-              onTap: () {},
-            )
-          ],
-        ),
-        SizedBox(
-          height: 20.sp,
-        ),
-        Row(
-          children: [
-            Text('Antivirus',style: AppTextStyles.normalThickText,),
-          ],
-        ),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

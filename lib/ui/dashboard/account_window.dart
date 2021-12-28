@@ -4,6 +4,7 @@ import 'package:hackgame/constants/colors.dart';
 import 'package:hackgame/constants/sizes.dart';
 import 'package:hackgame/constants/text_styles.dart';
 import 'package:hackgame/models/appUser.dart';
+import 'package:hackgame/providers/auth_provider.dart';
 import 'package:hackgame/ui/account_screen.dart';
 import 'package:hackgame/widgets/window.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,8 +20,8 @@ class AccountWindow extends StatefulWidget {
 class _AccountWindowState extends State<AccountWindow> {
   @override
   Widget build(BuildContext context) {
-    final AppUser user = Provider.of<AppUser>(context);
-
+  final AuthProvider authProvider = Provider.of<AuthProvider>(context);
+  final AppUser user = authProvider.user;
     return Window(
       onTap: (){
             showCupertinoDialog(
