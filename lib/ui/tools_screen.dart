@@ -10,7 +10,7 @@ import 'package:hackgame/models/tools.dart';
 import 'package:hackgame/services/tools_service.dart';
 import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
-import 'package:hackgame/ui/dashboard/money_window.dart';
+import 'package:hackgame/ui/dashboard/credit_window.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hackgame/ui/single_exploit.dart';
 import 'package:hackgame/widgets/buttons.dart';
@@ -154,22 +154,18 @@ class Store extends StatelessWidget {
       child: StreamBuilder<List<Tool>>(
           stream: ToolsService().getAllTools,
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              CircularProgressIndicator(
-                valueColor:
-                    new AlwaysStoppedAnimation<Color>(AppColors.appGreen),
-              );
-            }
+              if (snapshot.hasError) {
+                return Center(child: Text('Error',style: AppTextStyles.normalText,));
+              }
             if (snapshot.hasData) {
               return ToolsListPage(
                 tools: snapshot.data,
                 isOwned: false,
               );
             } else {
-              return Text(
-                'Error',
-                style: AppTextStyles.miniText,
-              );
+                return  CircularProgressIndicator(
+                        valueColor: new AlwaysStoppedAnimation<Color>(AppColors.appGreen),
+                      );
             }
           }),
     );
@@ -185,11 +181,8 @@ class Inventory extends StatelessWidget {
         child: StreamBuilder<List<Tool>>(
             stream: ToolsService().getUserTools,
             builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                CircularProgressIndicator(
-                  valueColor:
-                      new AlwaysStoppedAnimation<Color>(AppColors.appGreen),
-                );
+              if (snapshot.hasError) {
+                return Center(child: Text(snapshot.error));
               }
               if (snapshot.hasData) {
                 return ToolsListPage(
@@ -197,10 +190,9 @@ class Inventory extends StatelessWidget {
                   isOwned: true,
                 );
               } else {
-                return Text(
-                  'Error',
-                  style: AppTextStyles.miniText,
-                );
+                return  CircularProgressIndicator(
+                        valueColor: new AlwaysStoppedAnimation<Color>(AppColors.appGreen),
+                      );
               }
             }));
   }
@@ -213,105 +205,109 @@ class ToolsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        height: AppSizes.screenHeight(context) * 0.8,
-        child: ListView.builder(
-            itemCount: tools.length,
-            itemBuilder: (context, index) {
-              if (tools.length > 1) {
-                Tool tool=tools[index];
-                return Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(
-                        Icons.computer_outlined,
-                        color: AppColors.appGreen,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            tool.name,
-                            style: AppTextStyles.normalThickText,
-                          ),
-                          Text(
+    return Container(
+      height: AppSizes.screenHeight(context) * 0.8,
+      child: ListView.builder(
+          itemCount: tools.length,
+          itemBuilder: (context, index) {
+            if (tools.length > 1) {
+              Tool tool=tools[index];
+              return Container(
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(
+                      Icons.computer_outlined,
+                      color: AppColors.appGreen,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          tool.name,
+                          style: AppTextStyles.normalThickText,
+                        ),
+                        Container(
+                          width: AppSizes.screenWidth(context)*0.6,
+                          child: Text(
                             tool.description,
                             style: AppTextStyles.macroText,
+                            maxLines: null,
                           ),
-                          RichText(
-                            text: TextSpan(
-                              style: DefaultTextStyle.of(context).style,
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: '\$',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: AppColors.appGreen)),
-                                TextSpan(
-                                    text: ' ${tool.creditPrice}',
-                                    style: AppTextStyles.macroText
-                                        .copyWith(color: AppColors.appOrange)
-                                        .copyWith(color: Colors.white)),
-                                TextSpan(
-                                    text: ' or ',
-                                    style: AppTextStyles.normalText
-                                        .copyWith(color: Colors.white)),
-                                TextSpan(
-                                    text: 'C',
-                                    style: AppTextStyles.macroText.copyWith(
-                                        color: AppColors.appGold,
-                                        fontWeight: FontWeight.bold)),
-                                TextSpan(
-                                    text: ' ${tool.cryptoPrice}',
-                                    style: AppTextStyles.macroText
-                                        .copyWith(color: Colors.white)),
-                              ],
-                            ),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            style: DefaultTextStyle.of(context).style,
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: 'c',
+                                  style: AppTextStyles.creditStyle),
+                              TextSpan(
+                                  text: ' ${tool.creditPrice}',
+                                  style: AppTextStyles.macroText
+                
+                                      .copyWith(color: Colors.white)),
+                              TextSpan(
+                                  text: ' or ',
+                                  style: AppTextStyles.normalText
+                                      .copyWith(color: Colors.white)),
+                              TextSpan(
+                                  text: 'C',
+                                  style: AppTextStyles.cryptoStyle),
+                              TextSpan(
+                                  text: ' ${tool.cryptoPrice}',
+                                  style: AppTextStyles.macroText
+                                      .copyWith(color: Colors.white)),
+                            ],
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: 130.sp,
-                      ),
-                      Button(
-                        height: 30.sp,
-                        width: 80.sp,
-                        text: isOwned ? 'LAUNCH' : 'BUY',
-                        onTap: () {
-                          if (isOwned) {
-                            showCupertinoDialog(
-                                context: context,
-                                builder: (context) => SingleExploitScreen());
-                          } else {
-                            showCupertinoDialog(
-                                context: context,
-                                // backgroundColor: Colors.transparent,
-                                builder: (context) {
-                                  return BuyDialogue(
-                                    moneyAmount: 4500,
-                                    cryptoAmount: 400,
-                                    infoText: 'Buy the password cracker',
-                                  );
-                                });
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                );
-              } else {
-                return Center(
-                    child: Text(
-                  'No tools',
-                  style: AppTextStyles.miniText,
-                ));
-              }
-            }),
-      ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 10.sp,
+                    ),
+                    Button(
+                      height: 30.sp,
+                      width: 80.sp,
+                      text: isOwned ? 'LAUNCH' : 'BUY',
+                      onTap: () {
+                        if (isOwned) {
+                          showCupertinoDialog(
+                              context: context,
+                              builder: (context) => SingleExploitScreen());
+                        } else {
+                          showCupertinoDialog(
+                              context: context,
+                              // backgroundColor: Colors.transparent,
+                              builder: (context) {
+                                return BuyDialogue(
+                                  action: (String currency, double amount){
+                                    ToolsService().buyTool(
+                                      currency: currency,
+                                      amount: amount,
+                                      tool: tool
+                                    );
+                                  },
+                                  creditAmount: tool.creditPrice,
+                                  cryptoAmount: tool.cryptoPrice,
+                                  infoText: 'Buy the password cracker',
+                                );
+                              });
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return Center(
+                  child: Text(
+                'No tools',
+                style: AppTextStyles.miniText,
+              ));
+            }
+          }),
     );
   }
 }

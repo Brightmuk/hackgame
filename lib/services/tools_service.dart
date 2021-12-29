@@ -5,6 +5,7 @@ import 'package:hackgame/models/tools.dart';
 import 'dart:developer';
 
 import 'package:hackgame/providers/auth_provider.dart';
+import 'package:hackgame/services/user_service.dart';
 
 class ToolsService {
   final CollectionReference userCollection =
@@ -31,6 +32,25 @@ Stream<List<Tool>> get getUserTools{
         .map((query) {
             return query.docs.map((doc) => Tool.fromMap(doc.data())).toList();
         });
+}
+
+Future<void> buyTool({String currency, double amount, Tool tool})async{
+   String userId = FirebaseAuth.instance.currentUser.uid;
+   await FirebaseFirestore.instance.runTransaction((transaction) async {
+     AppUser user = await UserService().appUserFuture;
+
+     if(user!=null){
+       await userCollection.doc(userId).update({
+         currency:FieldValue.increment(-1*amount)
+    });
+    userCollection.doc(userId)
+    .collection('tools')
+    .add(tool.toMap());
+     }
+   }).catchError((e) {
+     print(e.toString());
+   });
+
 }
 
 }

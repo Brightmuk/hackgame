@@ -6,6 +6,7 @@ class Tool {
   final double creditPrice;
   final double cryptoPrice;
   final double upgrade;
+
   Tool({
     this.name,
     this.description,
@@ -18,10 +19,13 @@ class Tool {
   Map<String, dynamic> toMap() {
     return {
       'name': name,
+      'level':1,
+      'price':{
+        'credit':creditPrice,
+        'crypto':cryptoPrice,
+        'upgrade': upgrade,
+      },
       'description': description,
-      'creditPrice': creditPrice,
-      'cryptoPrice': cryptoPrice,
-      'upgrade': upgrade,
     };
   }
 
@@ -29,9 +33,9 @@ class Tool {
     return Tool(
       name: map['name'] ?? '',
       description: map['description'] ?? '',
-      creditPrice: map['creditPrice']?.toDouble() ?? 0.0,
-      cryptoPrice: map['cryptoPrice']?.toDouble() ?? 0.0,
-      upgrade: map['upgrade']?.toDouble() ?? 0.0,
+      creditPrice: map['price']['credit']?.toDouble() ?? 0.0,
+      cryptoPrice: map['price']['crypto']?.toDouble() ?? 0.0,
+      upgrade: map['price']['upgrade']?.toDouble() ?? 0.0,
     );
   }
 

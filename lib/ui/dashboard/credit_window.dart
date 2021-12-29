@@ -49,7 +49,7 @@ class _MoneyWindowState extends State<MoneyWindow> {
                     text: 'c ',
                     style: AppTextStyles.themedHeader,),
                 TextSpan(
-                    text: user.money.toString(),
+                    text: user.creditStr,
                     style: AppTextStyles.normalThickText
                         .copyWith(color: Colors.white)),
               ],

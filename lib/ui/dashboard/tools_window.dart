@@ -106,18 +106,18 @@ class ToolList extends StatelessWidget {
       return ListView.builder(
           itemCount: tools.length,
           itemBuilder: (context, index) {
+            Tool tool =tools[index];
             return Container(
               padding: EdgeInsets.only(bottom: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset(
-                    'assets/images/hack_icon.png',
-                    height: 40,
-                    width: 50,
-                  ),
+                    Icon(
+                      Icons.computer_outlined,
+                      color: AppColors.appGreen,
+                    ),
                   Text(
-                    'Netsh ${index + 1}',
+                    tool.name,
                     style: AppTextStyles.normalText,
                   ),
                   SizedBox(width: 40.sp,),

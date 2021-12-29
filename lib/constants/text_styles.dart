@@ -17,4 +17,7 @@ class AppTextStyles{
 
   static TextStyle largeText = TextStyle(color: Colors.white,fontSize: 16.sp,);
   static TextStyle largeThickText = TextStyle(color: Colors.white,fontSize: 16.sp,fontWeight: FontWeight.bold);
+
+  static TextStyle creditStyle = TextStyle(color: AppColors.appGreen, fontSize: 15.sp,fontWeight: FontWeight.bold,fontFamily: "Hack");
+  static TextStyle cryptoStyle = TextStyle(color: AppColors.appGold, fontSize: 15.sp,fontWeight: FontWeight.bold,fontFamily: "Hack");
 }

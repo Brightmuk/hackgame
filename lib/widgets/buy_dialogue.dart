@@ -8,10 +8,10 @@ import 'package:hackgame/widgets/window.dart';
 class BuyDialogue extends StatelessWidget {
   final String infoText;
   final Function action;
-  final int cryptoAmount;
-  final int moneyAmount;
+  final double cryptoAmount;
+  final double creditAmount;
 
-  const BuyDialogue({ Key key,this.infoText,this.action,this.moneyAmount,this.cryptoAmount }) : super(key: key);
+  const BuyDialogue({ Key key,this.infoText,this.action,this.creditAmount,this.cryptoAmount }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,22 +39,53 @@ class BuyDialogue extends StatelessWidget {
                         width: 80.sp,
                         text: 'Cancel',
                         onTap: () {
+                          
                            Navigator.pop(context);
                         },
                       ),
                       cryptoAmount!=null? Button(
                         height: 30.sp,
                         width: 80.sp,
-                        text: '$cryptoAmount C',
+
+                        custom: RichText(
+                          text: TextSpan(
+                            style: DefaultTextStyle.of(context).style,
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: 'C',
+                                  style: AppTextStyles.cryptoStyle),
+                              TextSpan(
+                                  text: ' $cryptoAmount',
+                                  style: AppTextStyles.macroText
+                                      .copyWith(color: Colors.white)),
+                            ],
+                          ),
+                        ),
                         onTap: () {
-                           Navigator.pop(context);
+                          action('crypto',cryptoAmount);
+                           Navigator.pop(context,);
                         },
                       ):Container(),
-                      moneyAmount!=null? Button(
+                      creditAmount!=null? Button(
                         height: 30.sp,
                         width: 80.sp,
-                        text: '\$ $moneyAmount',
+                        custom: RichText(
+                          text: TextSpan(
+                            style: DefaultTextStyle.of(context).style,
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: 'c',
+                                  style: AppTextStyles.creditStyle),
+                              TextSpan(
+                                  text: ' $creditAmount',
+                                  style: AppTextStyles.macroText
+                
+                                      .copyWith(color: Colors.white)),
+                            ],
+                          ),
+                        ),
                         onTap: () {
+                          action('credit',creditAmount);
                            Navigator.pop(context);
                         },
                       ):Container(),

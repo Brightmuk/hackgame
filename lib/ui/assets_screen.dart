@@ -8,7 +8,7 @@ import 'package:hackgame/constants/style_widgets.dart';
 import 'package:hackgame/constants/text_styles.dart';
 import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
-import 'package:hackgame/ui/dashboard/money_window.dart';
+import 'package:hackgame/ui/dashboard/credit_window.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hackgame/ui/single_asset.dart';
 import 'package:hackgame/widgets/action_dialogue.dart';
@@ -271,7 +271,7 @@ class ExploitList extends StatelessWidget {
                           backgroundColor: Colors.transparent,
                           builder: (context) {
                             return BuyDialogue(
-                              moneyAmount: 4500,
+                              creditAmount: 4500,
                               cryptoAmount: 400,
                               infoText: 'Buy the Harraein at',
                             );

@@ -10,6 +10,7 @@ class Button extends StatefulWidget {
   final double height;
   final String text;
   final Widget icon;
+  final Widget custom;
 
   const Button(
       {Key key,
@@ -19,7 +20,8 @@ class Button extends StatefulWidget {
       this.height = 50,
       this.width = 100,
       this.text,
-      this.icon
+      this.icon,
+      this.custom
       })
       : super(key: key);
 
@@ -65,20 +67,22 @@ class _ButtonState extends State<Button> with SingleTickerProviderStateMixin{
                   width: widget.width,
                   height: widget.height,
                   child: widget.icon==null? Center(
-                      child: Text(
+                      child: widget.custom==null?Text(
                     widget.text,
                     style: widget.miniButton?AppTextStyles.normalText.copyWith(fontSize: 10):
                      AppTextStyles.normalText,
-                  )):Row(
+                  ):
+                  widget.custom
+                  ):Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                     widget.icon,
                     SizedBox(width: 10,),
-                    Text(
+                    widget.custom==null? Text(
                     widget.text,
                     style: widget.miniButton?AppTextStyles.normalText.copyWith(fontSize: 10):
                      AppTextStyles.normalText,
-                  )
+                  ):widget.custom
                   ],),
                   color: _colorTween.value,
                   padding: EdgeInsets.all(5),

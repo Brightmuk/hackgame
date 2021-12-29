@@ -15,7 +15,7 @@ import 'package:hackgame/ui/dashboard/crypto_window.dart';
 import 'package:hackgame/ui/dashboard/device_status_window.dart';
 import 'package:hackgame/ui/dashboard/tools_window.dart';
 import 'package:hackgame/ui/dashboard/messages_window.dart';
-import 'package:hackgame/ui/dashboard/money_window.dart';
+import 'package:hackgame/ui/dashboard/credit_window.dart';
 import 'package:hackgame/ui/dashboard/processes_window.dart';
 
 import '../constants/sizes.dart';

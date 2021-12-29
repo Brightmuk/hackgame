@@ -9,7 +9,7 @@ import 'package:hackgame/constants/text_styles.dart';
 import 'package:hackgame/providers/auth_provider.dart';
 import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
-import 'package:hackgame/ui/dashboard/money_window.dart';
+import 'package:hackgame/ui/dashboard/credit_window.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hackgame/widgets/action_dialogue.dart';
 import 'package:hackgame/widgets/buttons.dart';
@@ -99,7 +99,7 @@ class _MoneyScreenState extends State<MoneyScreen> {
                                               text: 'c',
                                               style: AppTextStyles.themedHeader.copyWith(fontSize: 30.sp)),
                                           TextSpan(
-                                              text: user.money.toString(),
+                                              text: user.credit.toString(),
                                               style: AppTextStyles.normalThickText
                                                   .copyWith(fontSize: 30.sp)),
                                         ],

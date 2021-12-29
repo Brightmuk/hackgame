@@ -10,7 +10,7 @@ import 'package:hackgame/providers/auth_provider.dart';
 import 'package:hackgame/services/user_service.dart';
 import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
-import 'package:hackgame/ui/dashboard/money_window.dart';
+import 'package:hackgame/ui/dashboard/credit_window.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hackgame/widgets/action_dialogue.dart';
 import 'package:hackgame/widgets/buttons.dart';

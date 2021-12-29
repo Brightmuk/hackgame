@@ -30,8 +30,8 @@ class UserService {
         'attacks':0,
         'contracts':0,
         'hacks':0,
-        'money':1000,
-        'crypto':1000
+        'credit':10000,
+        'crypto':100
       }, SetOptions(merge: true));
      AuthProvider().init();
     } catch (e) {

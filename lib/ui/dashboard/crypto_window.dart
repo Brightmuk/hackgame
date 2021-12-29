@@ -50,7 +50,8 @@ class _CryptoWindowState extends State<CryptoWindow> {
                  
                   width: 10,
                 ),
-                Text(user.crypto.toString(),
+                SizedBox(width: 5,),
+                Text(user.cryptoStr,
                     style: AppTextStyles.normalThickText
                         .copyWith(color: Colors.white)),
               ],
