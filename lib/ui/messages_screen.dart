@@ -10,7 +10,7 @@ import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
 import 'package:hackgame/ui/dashboard/credit_window.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hackgame/ui/single_exploit.dart';
+import 'package:hackgame/ui/single_tool.dart';
 import 'package:hackgame/widgets/buttons.dart';
 import 'package:hackgame/widgets/buy_dialogue.dart';
 import 'package:hackgame/widgets/window.dart';
@@ -201,7 +201,7 @@ class ExploitList extends StatelessWidget {
                       if(isMessage){
                         showCupertinoDialog(
                         context: context,
-                        builder: (context) =>SingleExploitScreen());
+                        builder: (context) =>SingleToolScreen());
                       }else{
                       showCupertinoDialog(
                           context: context,

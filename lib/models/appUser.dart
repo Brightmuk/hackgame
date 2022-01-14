@@ -35,19 +35,22 @@ class AppUser {
   
 String get creditStr{
   if(this.credit>999999){
-    return '${(credit/1000000).toStringAsPrecision(2)} M';
+    String val = (credit/1000000).toStringAsFixed(5);
+    return '${val.substring(0,4)} M';
   }else if(this.credit>999){
-    
-    return '${(credit/1000).toStringAsPrecision(2)} K';
+    String val = (credit/1000).toStringAsFixed(5);
+    return '${val.substring(0,4)} K';
   }else{
     return credit.toString();
   }
 }
 String get cryptoStr{
   if(this.crypto>999999){
-    return '${(credit/1000000).toStringAsPrecision(2)} M';
+    String val = (crypto/1000000).toStringAsFixed(5);
+    return '${val.substring(0,4)} M';
   }else if(this.crypto>999){
-    return '${(credit/1000).toStringAsPrecision(2)} K';
+    String val = (crypto/1000).toStringAsFixed(5);
+    return '${val.substring(0,4)} K';
   }else{
     return crypto.toString();
   }

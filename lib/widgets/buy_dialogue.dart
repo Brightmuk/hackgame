@@ -5,6 +5,7 @@ import 'package:hackgame/widgets/buttons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hackgame/widgets/window.dart';
 
+
 class BuyDialogue extends StatelessWidget {
   final String infoText;
   final Function action;
@@ -46,10 +47,9 @@ class BuyDialogue extends StatelessWidget {
                       cryptoAmount!=null? Button(
                         height: 30.sp,
                         width: 80.sp,
-
                         custom: RichText(
                           text: TextSpan(
-                            style: DefaultTextStyle.of(context).style,
+                            
                             children: <TextSpan>[
                               TextSpan(
                                   text: 'C',
@@ -71,7 +71,6 @@ class BuyDialogue extends StatelessWidget {
                         width: 80.sp,
                         custom: RichText(
                           text: TextSpan(
-                            style: DefaultTextStyle.of(context).style,
                             children: <TextSpan>[
                               TextSpan(
                                   text: 'c',

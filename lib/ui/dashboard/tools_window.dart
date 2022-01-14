@@ -6,7 +6,7 @@ import 'package:hackgame/constants/text_styles.dart';
 import 'package:hackgame/models/tools.dart';
 import 'package:hackgame/services/tools_service.dart';
 import 'package:hackgame/ui/tools_screen.dart';
-import 'package:hackgame/ui/single_exploit.dart';
+import 'package:hackgame/ui/single_tool.dart';
 import 'package:hackgame/widgets/buttons.dart';
 import 'package:hackgame/widgets/buy_dialogue.dart';
 import 'package:hackgame/widgets/window.dart';
@@ -24,9 +24,9 @@ class _ToolsWindowState extends State<ToolsWindow> {
   Widget build(BuildContext context) {
     return Window(
       onTap: (){
-        showCupertinoDialog(
-        context: context,
-        builder: (context) =>ExploitsScreen());
+      showCupertinoDialog(
+      context: context,
+      builder: (context) =>ExploitsScreen());
       },
       content: Container(
         padding: AppSizes.topBottomPadding,
@@ -102,7 +102,7 @@ class ToolList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(tools.length>1){
+    if(tools.length>0){
       return ListView.builder(
           itemCount: tools.length,
           itemBuilder: (context, index) {
@@ -116,11 +116,14 @@ class ToolList extends StatelessWidget {
                       Icons.computer_outlined,
                       color: AppColors.appGreen,
                     ),
-                  Text(
-                    tool.name,
-                    style: AppTextStyles.normalText,
+                  Container(
+                    width: 120.sp,
+                    child: Text(
+                      tool.name,
+                      style: AppTextStyles.normalText,
+                    ),
                   ),
-                  SizedBox(width: 40.sp,),
+                  SizedBox(width: 30.sp,),
                   Button(
                     miniButton: true,
                   height: 25.sp,
@@ -130,7 +133,7 @@ class ToolList extends StatelessWidget {
 
                     showCupertinoDialog(
                     context: context,
-                    builder: (context) =>SingleExploitScreen());
+                    builder: (context) =>SingleToolScreen(tool: tool,));
                     
                   },
                   ),
@@ -139,7 +142,27 @@ class ToolList extends StatelessWidget {
             );
           });
     }else{
-      return Center(child: Text('No tools',style: AppTextStyles.miniText,));
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text('No tools. Get tools from the cyber store',style: AppTextStyles.miniText,),
+        SizedBox(height:10.sp),
+        Button(
+          miniButton: true,
+          height: 25.sp,
+          width: 100.sp,
+          text: 'OPEN STORE',
+          onTap: (){
+
+      showCupertinoDialog(
+      context: context,
+      builder: (context) =>ExploitsScreen());
+            
+          },
+          ),
+      ],
+      );
     }
 
   }

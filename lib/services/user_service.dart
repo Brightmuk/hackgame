@@ -9,7 +9,6 @@ class UserService {
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('users');
 
-
   Future<void> newUser({
     String avatar,
     String username,
@@ -21,57 +20,60 @@ class UserService {
     try {
       await userCollection.doc(userId).set({
         'avatar': avatar,
-        'ip':ip,
+        'ip': ip,
         'username': username,
         'joinedDate': DateTime.now(),
         'alias': alias,
         'level': 1,
         'reputation': 100,
-        'attacks':0,
-        'contracts':0,
-        'hacks':0,
-        'credit':10000,
-        'crypto':100
+        'attacks': 0,
+        'contracts': 0,
+        'hacks': 0,
+        'credit': 10000,
+        'crypto': 100
       }, SetOptions(merge: true));
-     AuthProvider().init();
+      AuthProvider().init();
     } catch (e) {
       print(e.toString());
     }
   }
 
   Future updateProfile({String toEdit, dynamic newValue}) async {
-  String userId = FirebaseAuth.instance.currentUser.uid;
-  try {
-    return await userCollection.doc(userId).update({
-      toEdit: newValue
-    });
-  } catch (e) {
-    print(e.toString());
-    return null;
+    String userId = FirebaseAuth.instance.currentUser.uid;
+    try {
+      return await userCollection.doc(userId).update({toEdit: newValue});
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
-}
-Stream<AppUser> get appUser{
-  String userId = FirebaseAuth.instance.currentUser?.uid;
-  return userCollection
+
+  Stream<AppUser> get appUser {
+    String userId = FirebaseAuth.instance.currentUser?.uid;
+    return userCollection
         .doc(userId)
         .snapshots()
         .map((doc) => AppUser.fromMap(doc.data()));
-}
+  }
 
-Future<AppUser> get appUserFuture{
-  
-  String userId = FirebaseAuth.instance.currentUser?.uid;
-  return userCollection
-        .doc(userId)
+  Future<AppUser> get appUserFuture {
+    String userId = FirebaseAuth.instance.currentUser?.uid;
+    return userCollection.doc(userId).get().then((doc) {
+      if (doc.exists) {
+        return AppUser.fromMap(doc.data());
+      } else {
+        return null;
+      }
+    });
+  }
+
+  Future<List<AppUser>> get appUsersFuture {
+    String username = FirebaseAuth.instance.currentUser?.displayName;
+    return userCollection
+        .where("username", isNotEqualTo: username)
         .get()
-        .then((doc){
-          if(doc.exists){
-            return AppUser.fromMap(doc.data());
-          }else{
-            return null;
-          }
-       } 
-    );
-}
-
+        .then((query) {
+      return query.docs.map((doc) => AppUser.fromMap(doc.data())).toList();
+    });
+  }
 }

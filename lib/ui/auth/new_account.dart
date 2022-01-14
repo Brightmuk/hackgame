@@ -65,22 +65,27 @@ class _NewAccountState extends State<NewAccount> {
                     child: SingleChildScrollView(
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      
                       children: [
-                        Text('Hello $name', style: AppTextStyles.themedHeader.copyWith(fontSize: 30)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Hello $name', style: AppTextStyles.themedHeader.copyWith(fontSize: 23)),
+                          Button(
+                            width: AppSizes.screenWidth(context)*0.2,
+                            height: 40.sp,
+                            text: 'Logout',
+                            onTap: ()async{
+                                AuthProvider().signOut();
+                              
+                            },
+                            ),
+                          ],
+                        ),
                         Text(
                           'Setup your hacker profile',
-                          style: AppTextStyles.themedHeader.copyWith(fontSize: 30),
+                          style: AppTextStyles.themedHeader.copyWith(fontSize: 23),
                         ),
-                                          Button(
-                      width: AppSizes.screenWidth(context)*0.9,
-                      height: 40.sp,
-                      text: 'Logout',
-                      onTap: ()async{
-                          AuthProvider().signOut();
-                        
-                      },
-                      ),
+
                         SizedBox(
                           height: 50.sp,
                         ),

@@ -12,9 +12,11 @@ import 'package:hackgame/ui/dashboard/account_window.dart';
 import 'package:hackgame/ui/dashboard/crypto_window.dart';
 import 'package:hackgame/ui/dashboard/credit_window.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hackgame/ui/single_exploit.dart';
+import 'package:hackgame/ui/single_tool.dart';
+import 'package:hackgame/ui/tools/password_cracker_screen.dart';
 import 'package:hackgame/widgets/buttons.dart';
 import 'package:hackgame/widgets/buy_dialogue.dart';
+import 'package:hackgame/widgets/load_overlay.dart';
 import 'package:hackgame/widgets/window.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -210,7 +212,7 @@ class ToolsListPage extends StatelessWidget {
       child: ListView.builder(
           itemCount: tools.length,
           itemBuilder: (context, index) {
-            if (tools.length > 1) {
+            if (tools.length > 0) {
               Tool tool=tools[index];
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -236,7 +238,10 @@ class ToolsListPage extends StatelessWidget {
                             maxLines: null,
                           ),
                         ),
-                        RichText(
+                        isOwned?
+                        
+                         Text('Level '+tool.level.toString(),style: AppTextStyles.infoText,):
+                         RichText(
                           text: TextSpan(
                             style: DefaultTextStyle.of(context).style,
                             children: <TextSpan>[
@@ -271,15 +276,35 @@ class ToolsListPage extends StatelessWidget {
                       height: 30.sp,
                       width: 80.sp,
                       text: isOwned ? 'LAUNCH' : 'BUY',
-                      onTap: () {
+                      onTap: () async{
                         if (isOwned) {
                           showCupertinoDialog(
                               context: context,
-                              builder: (context) => SingleExploitScreen());
+                              builder: (context) => SingleToolScreen(tool:tool,));
                         } else {
-                          showCupertinoDialog(
+                          Loader.showLoader(context);
+                          Tool userTool = await ToolsService().getTool(tool.id);
+                          Loader.hideLoader(context);
+                          if(userTool!=null){
+                            showCupertinoDialog(
                               context: context,
-                              // backgroundColor: Colors.transparent,
+                              builder: (context) {
+                                return BuyDialogue(
+                                  action: (String currency, double amount){
+                                    ToolsService().upgradeTool(
+                                      currency: currency,
+                                      amount: amount,
+                                      toolId: tool.id
+                                    );
+                                  },
+                                  creditAmount: tool.creditPrice*tool.upgrade,
+                                  cryptoAmount: tool.cryptoPrice*tool.upgrade,
+                                  infoText: 'Upgrade the ${userTool.name} to level ${userTool.level+1}',
+                                );
+                              });
+                          }else{
+                          await showCupertinoDialog(
+                              context: context,
                               builder: (context) {
                                 return BuyDialogue(
                                   action: (String currency, double amount){
@@ -291,9 +316,11 @@ class ToolsListPage extends StatelessWidget {
                                   },
                                   creditAmount: tool.creditPrice,
                                   cryptoAmount: tool.cryptoPrice,
-                                  infoText: 'Buy the password cracker',
+                                  infoText: 'Buy the ${tool.name}',
                                 );
                               });
+                          }
+                             
                         }
                       },
                     ),
@@ -310,4 +337,6 @@ class ToolsListPage extends StatelessWidget {
           }),
     );
   }
+  
+
 }

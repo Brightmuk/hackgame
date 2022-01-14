@@ -13,31 +13,33 @@ class ErrorDialogue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(20),
-      child: Window(
-        height: 180.sp,
-        color: Colors.black,
-        width: AppSizes.screenWidth(context)*0.9,
-        content: Scaffold(
-          backgroundColor: Colors.black,
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(errorText,style: AppTextStyles.normalThickText,),
-             
-              SizedBox(height: 10,),
-              Center(
-                child: Button(
-                  height: 30.sp,
-                  width: 80.sp,
-                  text: 'OK',
-                  onTap: () {
-                     Navigator.pop(context);
-                  },
-                ),
-              )
-            ],
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(20),
+        child: Window(
+          height: 180.sp,
+          color: Colors.black,
+          width: AppSizes.screenWidth(context)*0.9,
+          content: Scaffold(
+            backgroundColor: Colors.black,
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(errorText,style: AppTextStyles.normalThickText,),
+               
+                SizedBox(height: 10,),
+                Center(
+                  child: Button(
+                    height: 30.sp,
+                    width: 80.sp,
+                    text: 'OK',
+                    onTap: () {
+                       Navigator.pop(context);
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

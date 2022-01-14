@@ -8,6 +8,6 @@ class AppColors{
   static Color appGold = Color.fromRGBO(212, 175, 55, 1);
   static Color appGrey = Color.fromRGBO(20, 20, 20, 1);
   static Color fadedWhite = Color.fromRGBO(255, 255, 255, 0.15);
-  static Color barrierBlack = Colors.black.withOpacity(0.8);
+  static Color barrierBlack = Colors.black.withOpacity(0.5);
   
 }
