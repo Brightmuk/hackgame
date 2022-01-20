@@ -15,63 +15,74 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScannerScreen extends StatefulWidget {
   final Tool tool;
-  const ScannerScreen({ Key key,this.tool }) : super(key: key);
+  const ScannerScreen({Key key, this.tool}) : super(key: key);
 
   @override
   _ScannerScreenState createState() => _ScannerScreenState();
 }
 
 class _ScannerScreenState extends State<ScannerScreen> {
+  bool isScanning = false;
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text('Available devices',style: AppTextStyles.themedHeader,),
-        SizedBox(height: 10.sp,),
-        Container(
-          height: AppSizes.screenHeight(context)*0.5,
-          child: FutureBuilder<List<AppUser>>(
-            future: UserService().appUsersFuture,
-            builder: (context, snapshot) {
-              if(snapshot.hasError){
-                return Center(child: Text('An error occurred',style: AppTextStyles.normalText,));
-              }
-              if(snapshot.hasData){
-                List<AppUser> devices = snapshot.data;
-              return ListView.builder(
-                itemCount: devices.length,
-                itemBuilder: (context,index){
-                    return DeviceTile(ip:devices[index].ip);
-                  }
-                );
-              }else{
-                  return  Center(
-                    child: CircularProgressIndicator(
-                    valueColor: new AlwaysStoppedAnimation<Color>(AppColors.appGreen),
-                ),
-                  );
-              }
-
-            }
-          ),
-        ),
-        SizedBox(height: 20.sp,),
-        Button(
-          height: 40,
-          width: AppSizes.screenWidth(context)*0.8,
-          text: 'SCAN',
-          onTap: (){
-
-          },
-        )
-        
-    ],);
+    return !isScanning
+        ? Center(
+            child: Button(
+              height: 40,
+              width: AppSizes.screenWidth(context) * 0.8,
+              text: 'SCAN',
+              onTap: () {
+                setState(()=>isScanning=true);
+              },
+            ),
+          )
+        : Column(
+            children: [
+              Text(
+                'Available devices',
+                style: AppTextStyles.themedHeader,
+              ),
+              SizedBox(
+                height: 10.sp,
+              ),
+              Container(
+                height: AppSizes.screenHeight(context) * 0.5,
+                child: FutureBuilder<List<AppUser>>(
+                    future: UserService().appUsersFuture,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Center(
+                            child: Text(
+                          'An error occurred',
+                          style: AppTextStyles.normalText,
+                        ));
+                      }
+                      if (snapshot.hasData) {
+                        List<AppUser> devices = snapshot.data;
+                        return ListView.builder(
+                            itemCount: devices.length,
+                            itemBuilder: (context, index) {
+                              return DeviceTile(ip: devices[index].ip);
+                            });
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(
+                            valueColor: new AlwaysStoppedAnimation<Color>(
+                                AppColors.appGreen),
+                          ),
+                        );
+                      }
+                    }),
+              ),
+            ],
+          );
   }
 }
 
 class DeviceTile extends StatelessWidget {
   final String ip;
-  const DeviceTile({ Key key,this.ip }) : super(key: key);
+  const DeviceTile({Key key, this.ip}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -80,16 +91,18 @@ class DeviceTile extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-        Text(ip,style: AppTextStyles.normalText,),
-        Button(
-          height: 30,
-          width: 80,
-          text: 'EXPLOIT',
-          onTap: (){
-
-          },
-        )
-      ],),
+          Text(
+            ip,
+            style: AppTextStyles.normalText,
+          ),
+          Button(
+            height: 30,
+            width: 80,
+            text: 'EXPLOIT',
+            onTap: () {},
+          )
+        ],
+      ),
     );
   }
 }

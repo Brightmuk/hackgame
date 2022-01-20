@@ -34,6 +34,7 @@ class Tool {
         'crypto':cryptoPrice,
         'upgrade': upgrade,
       },
+      'meta':null,
       'description': description,
     };
   }
@@ -47,9 +48,8 @@ class Tool {
       cryptoPrice: map['price']['crypto']?.toDouble() ?? 0.0,
       level: map['level']??1,
       upgrade: map['price']['upgrade']?.toDouble() ?? 0.0,
-      meta: map['meta']??null
+      meta: map['meta']??{'enabled':true}
     );
   }
-
  
 }
